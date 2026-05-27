@@ -1,0 +1,1353 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CactusSvg from '../components/CactusSvg.astro';
+
+// Full list of dishes for selection on the order page
+const orderableItems = [
+  { id: 'start-1', name: 'Mezcal-Cured Ceviche', price: 19, category: 'Antojitos' },
+  { id: 'start-2', name: 'Charred Heirloom Caprese', price: 17, category: 'Antojitos' },
+  { id: 'start-3', name: 'Mesquite Wood Smoked Meatballs', price: 16, category: 'Antojitos' },
+  { id: 'start-4', name: 'Crispy Calabrian Calamari', price: 18, category: 'Antojitos' },
+  { id: 'main-1', name: 'Birria Gnocchi', price: 28, category: 'Especialidades' },
+  { id: 'main-2', name: 'Smoked Ancho Ribeye', price: 48, category: 'Especialidades' },
+  { id: 'main-3', name: 'Chipotle Cacio e Pepe', price: 24, category: 'Especialidades' },
+  { id: 'main-4', name: 'Tequila Lime Salmon', price: 34, category: 'Especialidades' },
+  { id: 'main-5', name: 'Guajillo Braised Short Rib', price: 38, category: 'Especialidades' },
+  { id: 'drink-1', name: 'The Patrón Margarita', price: 16, category: 'Bebidas' },
+  { id: 'drink-2', name: 'Oaxacan Boulevardier', price: 17, category: 'Bebidas' },
+  { id: 'drink-3', name: 'Desert Sage Old Fashioned', price: 18, category: 'Bebidas' },
+  { id: 'drink-4', name: 'Agave Spritz', price: 15, category: 'Bebidas' }
+];
+---
+
+<Layout title="Order Online | El Patrón Mesa">
+  <!-- Order Header -->
+  <section class="order-hero">
+    <div class="container text-center">
+      <span class="section-label reveal">Fresh &amp; Hot for Pickup</span>
+      <h1 class="reveal">Order Online</h1>
+      <p class="order-lead reveal">Select your dishes, customize your quantities, and pick up your meal fresh from our mesquite wood fire.</p>
+    </div>
+  </section>
+
+  <!-- Interactive Ordering Interface -->
+  <section class="section order-section">
+    <div class="container">
+      
+      <!-- MAIN ORDER SCREEN -->
+      <div class="order-grid" id="orderMainScreen">
+        
+        <!-- Left: Menu Selection -->
+        <div class="order-menu-column reveal-left">
+          <h2 class="column-title">Select Items</h2>
+          
+          <div class="order-menu-categories">
+            <!-- Antojitos -->
+            <div class="order-cat-block">
+              <h3>Antojitos <small>Starters</small></h3>
+              <div class="order-items-list">
+                {orderableItems.filter(i => i.category === 'Antojitos').map(item => (
+                  <div class="order-item-card" data-card-id={item.id}>
+                    <div class="order-item-info">
+                      <span class="item-name">{item.name}</span>
+                      <span class="item-price">${item.price}</span>
+                    </div>
+                    <div class="order-item-actions" data-actions-id={item.id}>
+                      <button class="btn-add-item" data-id={item.id} data-name={item.name} data-price={item.price}>
+                        Add to Cart
+                      </button>
+                      <div class="item-quantity-controls" style="display: none;">
+                        <button type="button" class="qty-btn dec-item-qty" data-id={item.id}>&minus;</button>
+                        <span class="item-qty-val">0</span>
+                        <button type="button" class="qty-btn inc-item-qty" data-id={item.id}>+</button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <!-- Especialidades -->
+            <div class="order-cat-block">
+              <h3>Especialidades <small>Mains</small></h3>
+              <div class="order-items-list">
+                {orderableItems.filter(i => i.category === 'Especialidades').map(item => (
+                  <div class="order-item-card" data-card-id={item.id}>
+                    <div class="order-item-info">
+                      <span class="item-name">{item.name}</span>
+                      <span class="item-price">${item.price}</span>
+                    </div>
+                    <div class="order-item-actions" data-actions-id={item.id}>
+                      <button class="btn-add-item" data-id={item.id} data-name={item.name} data-price={item.price}>
+                        Add to Cart
+                      </button>
+                      <div class="item-quantity-controls" style="display: none;">
+                        <button type="button" class="qty-btn dec-item-qty" data-id={item.id}>&minus;</button>
+                        <span class="item-qty-val">0</span>
+                        <button type="button" class="qty-btn inc-item-qty" data-id={item.id}>+</button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <!-- Bebidas -->
+            <div class="order-cat-block">
+              <h3>Bebidas <small>Mezcals &amp; Spirits</small></h3>
+              <div class="order-items-list">
+                {orderableItems.filter(i => i.category === 'Bebidas').map(item => (
+                  <div class="order-item-card" data-card-id={item.id}>
+                    <div class="order-item-info">
+                      <span class="item-name">{item.name}</span>
+                      <span class="item-price">${item.price}</span>
+                    </div>
+                    <div class="order-item-actions" data-actions-id={item.id}>
+                      <button class="btn-add-item" data-id={item.id} data-name={item.name} data-price={item.price}>
+                        Add to Cart
+                      </button>
+                      <div class="item-quantity-controls" style="display: none;">
+                        <button type="button" class="qty-btn dec-item-qty" data-id={item.id}>&minus;</button>
+                        <span class="item-qty-val">0</span>
+                        <button type="button" class="qty-btn inc-item-qty" data-id={item.id}>+</button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Shopping Cart & Checkout -->
+        <div class="order-cart-column reveal-right">
+          <div class="sticky-cart-container">
+            <h2 class="column-title">Your Selection</h2>
+            
+            <!-- Cart Items list -->
+            <div class="cart-box">
+              <div class="cart-empty-state" id="cartEmptyState">
+                <div class="cart-empty-icon" aria-hidden="true">&Oslash;</div>
+                <p>Your cart is empty.</p>
+                <small>Select from the dishes on the left to begin your order.</small>
+              </div>
+
+              <div class="cart-items" id="cartItemsList" style="display: none;">
+                <!-- Dynamically populated -->
+              </div>
+
+              <div class="cart-totals" id="cartTotals" style="display: none;">
+                <div class="total-row">
+                  <span>Subtotal</span>
+                  <span id="subtotalVal">$0.00</span>
+                </div>
+                <div class="total-row">
+                  <span>Tax (8.38% Las Vegas NV)</span>
+                  <span id="taxVal">$0.00</span>
+                </div>
+                <div class="total-row grand-total">
+                  <span>Total</span>
+                  <span id="totalVal">$0.00</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Checkout Form (appears when cart not empty) -->
+            <div class="checkout-form-container" id="checkoutFormBox" style="display: none;">
+              <h3 class="checkout-title">Pickup Details</h3>
+              <form id="orderForm">
+                <div class="form-group">
+                  <label for="customerName">Your Name</label>
+                  <input type="text" id="customerName" class="form-control" placeholder="Alex Gutierrez" required />
+                </div>
+                
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="customerPhone">Phone Number</label>
+                    <input type="tel" id="customerPhone" class="form-control" placeholder="(520) 555-0100" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="pickupTime">Pickup Time</label>
+                    <select id="pickupTime" class="form-control" required>
+                      <option value="">Select a time...</option>
+                      <option value="As soon as possible">As soon as possible (20-30 mins)</option>
+                      <option value="5:00 PM">5:00 PM</option>
+                      <option value="5:30 PM">5:30 PM</option>
+                      <option value="6:00 PM">6:00 PM</option>
+                      <option value="6:30 PM">6:30 PM</option>
+                      <option value="7:00 PM">7:00 PM</option>
+                      <option value="7:30 PM">7:30 PM</option>
+                      <option value="8:00 PM">8:00 PM</option>
+                      <option value="8:30 PM">8:30 PM</option>
+                      <option value="9:00 PM">9:00 PM</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="orderNotes">Special Instructions / Allergies</label>
+                  <textarea id="orderNotes" class="form-control" rows="2" placeholder="Example: Gluten allergy, extra salsa on the side..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-submit-order" id="btnSubmitOrder">
+                  <span class="btn-text-content">Place Order</span>
+                  <span class="btn-loader" id="btnLoader" style="display: none;"></span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SUCCESS ORDER SCREEN (Hidden by default) -->
+      <div class="success-screen" id="orderSuccessScreen" style="display: none;">
+        <div class="success-card">
+          <div class="success-glow"></div>
+          <div class="success-icon">
+            <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          <h2>Order Confirmed</h2>
+          <p class="success-tagline">We have stoked the hearth. Your fusion selection is being prepared.</p>
+          
+          <div class="success-details-box">
+            <div class="success-detail-row">
+              <span>Order Number</span>
+              <strong id="successOrderId">#EP-99837</strong>
+            </div>
+            <div class="success-detail-row">
+              <span>Pickup Scheduled</span>
+              <strong id="successPickupTime">As soon as possible</strong>
+            </div>
+            <div class="success-detail-row">
+              <span>Customer Name</span>
+              <strong id="successCustomerName">Alex</strong>
+            </div>
+            <div class="success-detail-row">
+              <span>Total Price</span>
+              <strong id="successTotal">$0.00</strong>
+            </div>
+          </div>
+
+          <p class="success-instructions">Please head to the restaurant at <strong>738 Agave Neon Way</strong> and pay at the counter or show your confirmation details to the host.</p>
+          
+          <div class="success-actions">
+            <button class="btn btn-secondary" id="btnResetOrder">Create New Order</button>
+            <a href={import.meta.env.BASE_URL} class="btn btn-primary">Return Home</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+    <!-- Floating Mobile Cart Bar -->
+    <div class="mobile-cart-bar" id="mobileCartBar" style="display: none;">
+      <div class="mobile-cart-info" id="mobileCartInfo" style="cursor: pointer;">
+        <span class="mobile-cart-count" id="mobileCartCount">0 items</span>
+        <span class="mobile-cart-divider">&bull;</span>
+        <span class="mobile-cart-total" id="mobileCartTotal">$0.00</span>
+      </div>
+      <button type="button" class="btn btn-primary btn-mobile-checkout" id="btnMobileCheckout">
+        Checkout Now
+      </button>
+    </div>
+
+    <!-- Mobile Cart Drawer Overlay -->
+    <div class="mobile-cart-drawer-overlay" id="mobileCartDrawerOverlay" style="display: none;"></div>
+
+    <!-- Mobile Cart Drawer -->
+    <div class="mobile-cart-drawer" id="mobileCartDrawer" style="display: none;">
+      <div class="drawer-header">
+        <span class="drawer-title">Your Selection</span>
+        <button type="button" class="btn-close-drawer" id="btnCloseDrawer" aria-label="Close drawer">&times;</button>
+      </div>
+      <div class="drawer-body">
+        <div class="cart-items" id="drawerCartItemsList">
+          <!-- Dynamically populated -->
+        </div>
+        <div class="drawer-summary">
+          <div class="total-row">
+            <span>Subtotal</span>
+            <span id="drawerSubtotalVal">$0.00</span>
+          </div>
+          <div class="total-row">
+            <span>Tax (8.38% Las Vegas NV)</span>
+            <span id="drawerTaxVal">$0.00</span>
+          </div>
+          <div class="total-row grand-total">
+            <span>Total</span>
+            <span id="drawerTotalVal">$0.00</span>
+          </div>
+        </div>
+        <button type="button" class="btn btn-primary btn-drawer-checkout" id="btnDrawerCheckout">
+          Proceed to Checkout
+        </button>
+      </div>
+    </div>
+
+    <!-- Cactus accent decor -->
+    <div class="order-accent-cactus" aria-hidden="true">
+      <CactusSvg width="120" height="200" />
+    </div>
+  </Layout>
+
+<style>
+  /* Order Hero */
+  .order-hero {
+    padding: clamp(6rem, 10vw, 8rem) 0 1rem 0;
+  }
+  
+  .order-lead {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  /* Grid Layout */
+  .order-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 4rem;
+    align-items: start;
+    transition: opacity 0.4s ease;
+  }
+
+  .column-title {
+    font-size: 1.6rem;
+    color: var(--color-text);
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.75rem;
+  }
+
+  /* Categories & Items selection */
+  .order-cat-block {
+    margin-bottom: 3.5rem;
+  }
+
+  .order-cat-block h3 {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-gold);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .order-cat-block h3 small {
+    font-size: 0.75rem;
+    color: var(--color-text-dark);
+  }
+
+  .order-items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .order-item-card {
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    transition: all var(--transition-normal);
+  }
+
+  .order-item-card:hover {
+    border-color: var(--color-border-focus);
+    background: var(--color-surface-hover);
+  }
+
+  .order-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .item-name {
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: var(--color-text);
+  }
+
+  .item-price {
+    font-size: 0.95rem;
+    color: var(--color-gold);
+  }
+
+  .btn-add-item {
+    background: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .btn-add-item:hover {
+    border-color: var(--color-accent);
+    color: var(--color-text);
+    background: rgba(204, 106, 44, 0.15);
+  }
+
+  /* Cart box right column */
+  .sticky-cart-container {
+    position: sticky;
+    top: calc(var(--header-height) + 2rem);
+  }
+
+  .cart-box {
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border);
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .cart-empty-state {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: var(--color-text-dark);
+  }
+
+  .cart-empty-icon {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    color: var(--color-border);
+    margin-bottom: 1rem;
+  }
+
+  .cart-empty-state p {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .cart-empty-state small {
+    font-size: 0.75rem;
+  }
+
+  .cart-items {
+    max-height: 280px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .cart-item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+  }
+
+  .cart-item-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    max-width: 60%;
+  }
+
+  .cart-item-details strong {
+    color: var(--color-text);
+    font-weight: 400;
+  }
+
+  .cart-item-details span {
+    color: var(--color-text-dark);
+    font-size: 0.8rem;
+  }
+
+  /* Sidebar & Drawer Cart Quantity Controls (Clean Minimalist styling) */
+  .cart-item-quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: transparent;
+    border: none;
+    padding: 0;
+  }
+
+  .cart-item-quantity-controls .qty-btn {
+    background: transparent;
+    border: 1px solid rgba(221, 161, 94, 0.25); /* sand-gold thin border */
+    color: var(--color-text-muted);
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+    padding: 0;
+    line-height: 1;
+  }
+
+  .cart-item-quantity-controls .qty-btn:hover {
+    color: var(--color-gold);
+    border-color: var(--color-gold);
+    background: rgba(221, 161, 94, 0.08);
+  }
+
+  .cart-item-quantity-controls .qty-val {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text);
+    min-width: 14px;
+    text-align: center;
+  }
+
+  .cart-item-price {
+    font-weight: 500;
+    color: var(--color-gold);
+  }
+
+  .cart-totals {
+    border-top: 1px solid var(--color-border);
+    padding-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .total-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
+
+  .grand-total {
+    font-size: 1.15rem;
+    color: var(--color-text);
+    border-top: 1px dashed var(--color-border);
+    padding-top: 0.75rem;
+    margin-top: 0.25rem;
+    font-weight: 500;
+  }
+
+  .grand-total span:last-child {
+    color: var(--color-gold);
+  }
+
+  /* Checkout Form styling */
+  .checkout-form-container {
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border);
+    padding: 2rem;
+  }
+
+  .checkout-title {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-text);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  .btn-submit-order {
+    width: 100%;
+    margin-top: 1rem;
+    height: 48px;
+  }
+
+  /* Success Screen styling */
+  .success-screen {
+    animation: success-reveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes success-reveal {
+    from { opacity: 0; transform: scale(0.96) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  .success-card {
+    max-width: 600px;
+    margin: 0 auto 5rem auto;
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border);
+    padding: 4rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .success-glow {
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(82, 183, 136, 0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .success-icon {
+    display: inline-flex;
+    background: rgba(82, 183, 136, 0.1);
+    color: #52b788;
+    border-radius: 50%;
+    padding: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .success-card h2 {
+    font-size: 2.4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .success-tagline {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin-bottom: 3rem;
+  }
+
+  .success-details-box {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .success-detail-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.75rem;
+  }
+
+  .success-detail-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .success-detail-row span {
+    color: var(--color-text-muted);
+  }
+
+  .success-detail-row strong {
+    color: var(--color-gold);
+  }
+
+  .success-instructions {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+
+  .success-actions {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+
+  /* Button Loader */
+  .btn-loader {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: var(--color-text);
+    border-radius: 50%;
+    animation: loader-spin 0.8s linear infinite;
+    display: inline-block;
+  }
+
+  @keyframes loader-spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* Accent decor */
+  .order-accent-cactus {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: -1;
+    opacity: 0.1;
+    pointer-events: none;
+  }
+
+  /* Responsive layout values */
+  @media (max-width: 992px) {
+    .order-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    
+    .sticky-cart-container {
+      position: static;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .form-row {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    
+    .success-card {
+      padding: 2.5rem 1.5rem;
+    }
+
+    .success-actions {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .success-actions .btn {
+      width: 100%;
+    }
+  }
+
+  /* Mobile Floating Cart Bar */
+  .mobile-cart-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(11, 9, 8, 0.95);
+    backdrop-filter: blur(16px);
+    border-top: 1px solid var(--color-accent);
+    padding: 0.85rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 90;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.6);
+    animation: cart-bar-slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes cart-bar-slide-up {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+
+  .mobile-cart-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    color: var(--color-text);
+  }
+
+  .mobile-cart-count {
+    font-weight: 500;
+  }
+
+  .mobile-cart-divider {
+    color: var(--color-accent);
+  }
+
+  .mobile-cart-total {
+    font-weight: 600;
+    color: var(--color-gold);
+  }
+
+  .btn-mobile-checkout {
+    font-size: 0.75rem !important;
+    padding: 0.55rem 1.25rem !important;
+  }
+
+  /* Hide on desktop, show only on mobile */
+  @media (max-width: 992px) {
+    .mobile-cart-bar {
+      display: flex;
+    }
+  }
+  
+  @media (min-width: 993px) {
+    .mobile-cart-bar {
+      display: none !important;
+    }
+  }
+
+  /* Card quantity controls styling */
+  .order-item-actions {
+    min-width: 110px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  /* Card Item Quantity Controls (Terracotta/Gold pill styling on left menu grid) */
+  .item-quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 0.25rem 0.5rem;
+    border-radius: 20px;
+  }
+
+  .item-quantity-controls .qty-btn {
+    background: var(--color-surface-hover);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+    padding: 0;
+    line-height: 1;
+  }
+
+  .item-quantity-controls .qty-btn:hover {
+    color: var(--color-text);
+    border-color: var(--color-accent);
+    background: var(--color-accent);
+  }
+
+  .item-quantity-controls .item-qty-val {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text);
+    min-width: 14px;
+    text-align: center;
+  }
+
+  /* Mobile Cart Drawer Styles */
+  .mobile-cart-drawer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 95;
+  }
+
+  .mobile-cart-drawer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(16, 13, 11, 0.98);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid var(--color-accent);
+    border-radius: 20px 20px 0 0;
+    padding: 1.5rem;
+    z-index: 96;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.8);
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    max-height: 75vh;
+  }
+
+  .mobile-cart-drawer.active {
+    transform: translateY(0);
+  }
+
+  .drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 1.25rem;
+  }
+
+  .drawer-title {
+    font-family: var(--font-body);
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--color-text);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .btn-close-drawer {
+    background: transparent;
+    border: none;
+    color: var(--color-text-muted);
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    transition: color var(--transition-fast);
+  }
+
+  .btn-close-drawer:hover {
+    color: var(--color-accent);
+  }
+
+  .drawer-body {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    flex-grow: 1;
+    gap: 1.5rem;
+  }
+
+  .drawer-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    border-top: 1px solid var(--color-border);
+    padding-top: 1.25rem;
+    margin-top: 0.5rem;
+  }
+
+  .btn-drawer-checkout {
+    width: 100%;
+    padding: 0.85rem !important;
+    text-align: center;
+    font-size: 0.85rem !important;
+    margin-top: 0.5rem;
+  }
+
+  .mobile-cart-drawer .cart-item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+</style>
+
+<script>
+  // Structured Order API Preparation
+  // In a production app, replace this mock function with your actual database/payment endpoint.
+  // Example: fetch('/api/order', { method: 'POST', body: JSON.stringify(orderData) })
+  async function submitOrderToAPI(orderData: any): Promise<{ success: boolean; orderId: string }> {
+    console.log("Submitting order payload to API...", orderData);
+    
+    // Simulate API round-trip delay
+    await new Promise(resolve => setTimeout(resolve, 1500));
+
+    // Return mock success response
+    const mockId = "EP-" + Math.floor(10000 + Math.random() * 90000);
+    return {
+      success: true,
+      orderId: mockId
+    };
+  }
+
+  function initOrderPage() {
+    const cartEmptyState = document.getElementById('cartEmptyState');
+    const cartItemsList = document.getElementById('cartItemsList');
+    const cartTotals = document.getElementById('cartTotals');
+    const checkoutFormBox = document.getElementById('checkoutFormBox');
+    
+    const subtotalVal = document.getElementById('subtotalVal');
+    const taxVal = document.getElementById('taxVal');
+    const totalVal = document.getElementById('totalVal');
+
+    // Drawer elements
+    const drawerCartItemsList = document.getElementById('drawerCartItemsList');
+    const drawerSubtotalVal = document.getElementById('drawerSubtotalVal');
+    const drawerTaxVal = document.getElementById('drawerTaxVal');
+    const drawerTotalVal = document.getElementById('drawerTotalVal');
+    const mobileCartInfo = document.getElementById('mobileCartInfo');
+    const mobileCartDrawer = document.getElementById('mobileCartDrawer');
+    const mobileCartDrawerOverlay = document.getElementById('mobileCartDrawerOverlay');
+    const btnCloseDrawer = document.getElementById('btnCloseDrawer');
+    const btnDrawerCheckout = document.getElementById('btnDrawerCheckout');
+
+    const orderForm = document.getElementById('orderForm') as HTMLFormElement;
+    const btnSubmitOrder = document.getElementById('btnSubmitOrder');
+    const btnLoader = document.getElementById('btnLoader');
+    
+    const orderMainScreen = document.getElementById('orderMainScreen');
+    const orderSuccessScreen = document.getElementById('orderSuccessScreen');
+    
+    const successOrderId = document.getElementById('successOrderId');
+    const successPickupTime = document.getElementById('successPickupTime');
+    const successCustomerName = document.getElementById('successCustomerName');
+    const successTotal = document.getElementById('successTotal');
+    const btnResetOrder = document.getElementById('btnResetOrder');
+
+    if (!orderForm) return; // Not on order page or components missing
+
+    function getCart() {
+      try {
+        const cartData = localStorage.getItem('el_patron_cart');
+        return cartData ? JSON.parse(cartData) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveCart(cart: any[]) {
+      localStorage.setItem('el_patron_cart', JSON.stringify(cart));
+      window.dispatchEvent(new Event('cart-updated'));
+    }
+
+    function openDrawer() {
+      if (mobileCartDrawer && mobileCartDrawerOverlay) {
+        mobileCartDrawer.style.display = 'flex';
+        mobileCartDrawerOverlay.style.display = 'block';
+        setTimeout(() => {
+          mobileCartDrawer.classList.add('active');
+        }, 10);
+      }
+    }
+
+    function closeDrawer() {
+      if (mobileCartDrawer && mobileCartDrawerOverlay) {
+        mobileCartDrawer.classList.remove('active');
+        setTimeout(() => {
+          mobileCartDrawer.style.display = 'none';
+          mobileCartDrawerOverlay.style.display = 'none';
+        }, 400);
+      }
+    }
+
+    if (mobileCartInfo) mobileCartInfo.onclick = openDrawer;
+    if (btnCloseDrawer) btnCloseDrawer.onclick = closeDrawer;
+    if (mobileCartDrawerOverlay) mobileCartDrawerOverlay.onclick = closeDrawer;
+
+    function renderCart() {
+      const cart = getCart();
+
+      // First reset all item selector states to default (Add to Cart visible, Controls hidden)
+      document.querySelectorAll('.btn-add-item').forEach((btn: any) => {
+        btn.style.display = 'block';
+      });
+      document.querySelectorAll('.item-quantity-controls').forEach((ctrl: any) => {
+        ctrl.style.display = 'none';
+      });
+
+      if (cart.length === 0) {
+        if (cartEmptyState) cartEmptyState.style.display = 'block';
+        if (cartItemsList) cartItemsList.style.display = 'none';
+        if (cartTotals) cartTotals.style.display = 'none';
+        if (checkoutFormBox) checkoutFormBox.style.display = 'none';
+        
+        // Hide mobile cart bar & close drawer
+        const mobileCartBar = document.getElementById('mobileCartBar');
+        if (mobileCartBar) mobileCartBar.style.display = 'none';
+        closeDrawer();
+        return;
+      }
+
+      // Hide empty state, show cart layout
+      if (cartEmptyState) cartEmptyState.style.display = 'none';
+      if (cartItemsList) {
+        cartItemsList.style.display = 'flex';
+        cartItemsList.innerHTML = ''; // clear
+      }
+      if (drawerCartItemsList) {
+        drawerCartItemsList.innerHTML = ''; // clear
+      }
+      if (cartTotals) cartTotals.style.display = 'flex';
+      if (checkoutFormBox) checkoutFormBox.style.display = 'block';
+
+      let subtotal = 0;
+      let totalItems = 0;
+
+      cart.forEach((item: any) => {
+        subtotal += item.price * item.quantity;
+        totalItems += item.quantity;
+
+        // Toggle card action button state on left column
+        const actionContainer = document.querySelector(`[data-actions-id="${item.id}"]`);
+        if (actionContainer) {
+          const addBtn = actionContainer.querySelector('.btn-add-item') as HTMLElement;
+          const qtyCtrl = actionContainer.querySelector('.item-quantity-controls') as HTMLElement;
+          const qtyVal = actionContainer.querySelector('.item-qty-val') as HTMLElement;
+
+          if (addBtn && qtyCtrl && qtyVal) {
+            addBtn.style.display = 'none';
+            qtyCtrl.style.display = 'flex';
+            qtyVal.textContent = item.quantity.toString();
+          }
+        }
+
+        const row = document.createElement('div');
+        row.className = 'cart-item-row';
+        row.innerHTML = `
+          <div class="cart-item-details">
+            <strong>${item.name}</strong>
+            <span>$${item.price} each</span>
+          </div>
+          <div class="cart-item-quantity-controls">
+            <button type="button" class="qty-btn dec-qty" data-id="${item.id}">&minus;</button>
+            <span class="qty-val">${item.quantity}</span>
+            <button type="button" class="qty-btn inc-qty" data-id="${item.id}">+</button>
+          </div>
+          <span class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</span>
+        `;
+        if (cartItemsList) cartItemsList.appendChild(row);
+
+        // Duplicate for Mobile Drawer
+        const drawerRow = document.createElement('div');
+        drawerRow.className = 'cart-item-row';
+        drawerRow.innerHTML = `
+          <div class="cart-item-details">
+            <strong>${item.name}</strong>
+            <span>$${item.price} each</span>
+          </div>
+          <div class="cart-item-quantity-controls">
+            <button type="button" class="qty-btn dec-qty" data-id="${item.id}">&minus;</button>
+            <span class="qty-val">${item.quantity}</span>
+            <button type="button" class="qty-btn inc-qty" data-id="${item.id}">+</button>
+          </div>
+          <span class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</span>
+        `;
+        if (drawerCartItemsList) drawerCartItemsList.appendChild(drawerRow);
+      });
+
+      // Compute Taxes and Totals (8.38% Las Vegas tax rate)
+      const taxRate = 0.0838;
+      const tax = subtotal * taxRate;
+      const total = subtotal + tax;
+
+      if (subtotalVal) subtotalVal.textContent = `$${subtotal.toFixed(2)}`;
+      if (taxVal) taxVal.textContent = `$${tax.toFixed(2)}`;
+      if (totalVal) totalVal.textContent = `$${total.toFixed(2)}`;
+
+      if (drawerSubtotalVal) drawerSubtotalVal.textContent = `$${subtotal.toFixed(2)}`;
+      if (drawerTaxVal) drawerTaxVal.textContent = `$${tax.toFixed(2)}`;
+      if (drawerTotalVal) drawerTotalVal.textContent = `$${total.toFixed(2)}`;
+
+      // Update Mobile Floating Cart Bar
+      const mobileCartBar = document.getElementById('mobileCartBar');
+      const mobileCartCount = document.getElementById('mobileCartCount');
+      const mobileCartTotal = document.getElementById('mobileCartTotal');
+      
+      if (mobileCartBar && mobileCartCount && mobileCartTotal) {
+        mobileCartCount.textContent = `${totalItems} item${totalItems > 1 ? 's' : ''}`;
+        mobileCartTotal.textContent = `$${total.toFixed(2)}`;
+        mobileCartBar.style.display = 'flex';
+      }
+
+      // Attach increment/decrement event listeners in sidebar & drawer
+      document.querySelectorAll('.dec-qty').forEach(btn => {
+        btn.onclick = (e) => {
+          const id = (e.currentTarget as HTMLElement).getAttribute('data-id');
+          adjustQuantity(id, -1);
+        };
+      });
+
+      document.querySelectorAll('.inc-qty').forEach(btn => {
+        btn.onclick = (e) => {
+          const id = (e.currentTarget as HTMLElement).getAttribute('data-id');
+          adjustQuantity(id, 1);
+        };
+      });
+    }
+
+    function adjustQuantity(id: string | null, amount: number) {
+      if (!id) return;
+      let cart = getCart();
+      const index = cart.findIndex((i: any) => i.id === id);
+      if (index > -1) {
+        cart[index].quantity += amount;
+        if (cart[index].quantity <= 0) {
+          cart.splice(index, 1);
+        }
+        saveCart(cart);
+        renderCart();
+      }
+    }
+
+    // Add directly from page action buttons (left column)
+    document.querySelectorAll('.btn-add-item').forEach(button => {
+      button.onclick = (e) => {
+        const btn = e.currentTarget as HTMLButtonElement;
+        const id = btn.getAttribute('data-id');
+        const name = btn.getAttribute('data-name');
+        const price = parseFloat(btn.getAttribute('data-price') || '0');
+
+        if (!id || !name) return;
+
+        let cart = getCart();
+        const index = cart.findIndex((i: any) => i.id === id);
+        if (index > -1) {
+          cart[index].quantity += 1;
+        } else {
+          cart.push({ id, name, price, quantity: 1 });
+        }
+        
+        saveCart(cart);
+        renderCart();
+      };
+    });
+
+    // Add event listeners for inline item quantity adjustments (runs once)
+    document.querySelectorAll('.dec-item-qty').forEach(btn => {
+      btn.onclick = (e) => {
+        const id = (e.currentTarget as HTMLElement).getAttribute('data-id');
+        adjustQuantity(id, -1);
+      };
+    });
+
+    document.querySelectorAll('.inc-item-qty').forEach(btn => {
+      btn.onclick = (e) => {
+        const id = (e.currentTarget as HTMLElement).getAttribute('data-id');
+        adjustQuantity(id, 1);
+      };
+    });
+
+    // Setup Mobile Checkout smooth scroll
+    const btnMobileCheckout = document.getElementById('btnMobileCheckout');
+    if (btnMobileCheckout) {
+      btnMobileCheckout.onclick = () => {
+        closeDrawer();
+        const cartBox = document.querySelector('.sticky-cart-container');
+        if (cartBox) {
+          cartBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      };
+    }
+
+    if (btnDrawerCheckout) {
+      btnDrawerCheckout.onclick = () => {
+        closeDrawer();
+        const cartBox = document.querySelector('.sticky-cart-container');
+        if (cartBox) {
+          cartBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      };
+    }
+
+    // Check if we came here from the specials or menu with a query parameter (e.g. ?add=spec-1)
+    const urlParams = new URLSearchParams(window.location.search);
+    const itemToAdd = urlParams.get('add');
+    if (itemToAdd) {
+      // Find matching button on the page and click it to trigger addition flow
+      const matchBtn = document.querySelector(`.btn-add-item[data-id="${itemToAdd}"]`) as HTMLButtonElement;
+      if (matchBtn) {
+        matchBtn.click();
+        // Clean URL to avoid adding repeatedly on refresh
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+    }
+
+    // Submit form flow
+    orderForm.onsubmit = async (e) => {
+      e.preventDefault();
+
+      const customerNameInput = document.getElementById('customerName') as HTMLInputElement;
+      const customerPhoneInput = document.getElementById('customerPhone') as HTMLInputElement;
+      const pickupTimeInput = document.getElementById('pickupTime') as HTMLInputElement;
+      const orderNotesInput = document.getElementById('orderNotes') as HTMLInputElement;
+
+      const orderData = {
+        items: getCart(),
+        customer: {
+          name: customerNameInput.value,
+          phone: customerPhoneInput.value
+        },
+        pickupTime: pickupTimeInput.value,
+        notes: orderNotesInput.value,
+        timestamp: new Date().toISOString()
+      };
+
+      // Loading state UI
+      if (btnSubmitOrder) {
+        btnSubmitOrder.setAttribute('disabled', 'true');
+        const txt = btnSubmitOrder.querySelector('.btn-text-content') as HTMLElement;
+        if (txt) txt.style.display = 'none';
+      }
+      if (btnLoader) btnLoader.style.display = 'inline-block';
+
+      try {
+        // Send to structured mock API handler
+        const result = await submitOrderToAPI(orderData);
+        
+        if (result.success) {
+          // Clear cart
+          saveCart([]);
+
+          // Populate success UI
+          if (successOrderId) successOrderId.textContent = `#${result.orderId}`;
+          if (successPickupTime) successPickupTime.textContent = orderData.pickupTime;
+          if (successCustomerName) successCustomerName.textContent = orderData.customer.name;
+          
+          let subtotal = orderData.items.reduce((sum, item: any) => sum + (item.price * item.quantity), 0);
+          let tax = subtotal * 0.0838; // 8.38% Las Vegas
+          let total = subtotal + tax;
+          if (successTotal) successTotal.textContent = `$${total.toFixed(2)}`;
+
+          // Hide order screen, show success screen
+          if (orderMainScreen) orderMainScreen.style.display = 'none';
+          if (orderSuccessScreen) orderSuccessScreen.style.display = 'block';
+          
+          // Scroll page to top
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      } catch (error) {
+        console.error("Ordering failed", error);
+        alert("An error occurred placing your order. Please try again or call the restaurant directly.");
+      } finally {
+        // Revert loader UI
+        if (btnSubmitOrder) {
+          btnSubmitOrder.removeAttribute('disabled');
+          const txt = btnSubmitOrder.querySelector('.btn-text-content') as HTMLElement;
+          if (txt) txt.style.display = '';
+        }
+        if (btnLoader) btnLoader.style.display = 'none';
+      }
+    };
+
+    // Reset order handler
+    if (btnResetOrder) {
+      btnResetOrder.onclick = () => {
+        // Reset form inputs
+        orderForm.reset();
+        
+        // Toggle screens
+        if (orderSuccessScreen) orderSuccessScreen.style.display = 'none';
+        if (orderMainScreen) {
+          orderMainScreen.style.display = 'grid';
+          // Trigger animations check
+          const reveals = orderMainScreen.querySelectorAll('.reveal-left, .reveal-right');
+          reveals.forEach(r => r.classList.add('active'));
+        }
+        
+        renderCart();
+      };
+    }
+
+    // Initial render call
+    renderCart();
+  }
+
+  // Load immediately
+  initOrderPage();
+
+  // Astro page transitions load
+  document.addEventListener('astro:page-load', initOrderPage);
+</script>

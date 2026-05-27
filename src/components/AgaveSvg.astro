@@ -1,0 +1,41 @@
+---
+interface Props {
+  width?: string;
+  height?: string;
+  className?: string;
+}
+
+const { width = "120", height = "100", className = "" } = Astro.props;
+---
+
+<svg 
+  width={width} 
+  height={height} 
+  viewBox="0 0 120 100" 
+  class={`agave-svg ${className}`}
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- Center Spire -->
+  <path d="M60,95 Q60,50 60,10 Q61,50 60,95 Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+  
+  <!-- Inner Leaves (Symmetrical) -->
+  <!-- Left -->
+  <path d="M60,95 Q54,55 48,25 Q54,60 60,95 Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"></path>
+  <!-- Right -->
+  <path d="M60,95 Q66,55 72,25 Q66,60 60,95 Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"></path>
+  
+  <!-- Middle Leaves -->
+  <!-- Left -->
+  <path d="M60,95 Q45,60 34,40 Q46,70 60,95 Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"></path>
+  <!-- Right -->
+  <path d="M60,95 Q75,60 86,40 Q74,70 60,95 Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"></path>
+  
+  <!-- Outer Leaves -->
+  <!-- Left -->
+  <path d="M60,95 Q32,70 18,60 Q38,80 60,95 Z" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"></path>
+  <!-- Right -->
+  <path d="M60,95 Q88,70 102,60 Q82,80 60,95 Z" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"></path>
+
+  <!-- Ground Accent Line -->
+  <path d="M15,96 L105,96" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"></path>
+</svg>

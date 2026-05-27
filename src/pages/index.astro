@@ -1,0 +1,882 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CactusSvg from '../components/CactusSvg.astro';
+import AgaveSvg from '../components/AgaveSvg.astro';
+
+// Daily Specials Data
+const specials = [
+  {
+    id: 'spec-1',
+    name: 'Birria Gnocchi',
+    price: '$28',
+    description: 'Slow-braised beef birria, hand-rolled potato gnocchi, cotija cheese, fresh cilantro oil, and rich consommé drizzle.',
+    category: 'Mexican-Italian',
+    imageText: 'Fusion Gnocchi'
+  },
+  {
+    id: 'spec-2',
+    name: 'Smoked Ancho Ribeye',
+    price: '$48',
+    description: '16oz wood-fired dry-aged ribeye, smoked ancho chili rub, bone marrow butter, served with grilled agave-glazed scallions.',
+    category: 'Mexican-American',
+    imageText: 'Wood-fired Steak'
+  },
+  {
+    id: 'spec-3',
+    name: 'Chipotle Cacio e Pepe',
+    price: '$24',
+    description: 'Fresh artisanal spaghetti, pecorino romano, toasted black pepper, chipotle-infused olive oil, and charred corn dust.',
+    category: 'Mexican-Italian',
+    imageText: 'Spiced Pasta'
+  },
+  {
+    id: 'spec-4',
+    name: 'Cajeta Tiramisu',
+    price: '$12',
+    description: 'Espresso-soaked ladyfingers, light mascarpone cream, dark cajeta goat milk caramel, and spiced Mexican cocoa dusting.',
+    category: 'Mexican-Italian-American',
+    imageText: 'Fusion Dessert'
+  }
+];
+---
+
+<Layout title="El Patrón | Three Cultures, One Flavor">
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="hero-bg-overlay"></div>
+    <div class="container hero-container">
+      <div class="hero-content">
+        <span class="hero-tagline reveal">An Culinary Convergence</span>
+        <h1 class="hero-title reveal">Three Cultures.<br/><span class="text-gradient">One Flavor.</span></h1>
+        <p class="hero-desc reveal">
+          Where the rich heritage of Mexican spices, the timeless artistry of Italian pasta, and the bold, wood-fired hearths of the American steakhouse meet under the Las Vegas sky.
+        </p>
+        <div class="hero-actions reveal">
+          <a href={`${import.meta.env.BASE_URL}menu`} class="btn btn-primary">Explore Menu</a>
+          <a href={`${import.meta.env.BASE_URL}order`} class="btn btn-secondary">Order Online</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll Down Indicator -->
+    <a href="#about-teaser" class="scroll-indicator" aria-label="Scroll to content">
+      <span class="scroll-mouse">
+        <span class="scroll-wheel"></span>
+      </span>
+      <span class="scroll-arrow"></span>
+    </a>
+
+    <!-- Desert Background Silhouettes -->
+    <div class="hero-cactus-left" aria-hidden="true">
+      <CactusSvg width="140" height="230" className="cactus-hero" />
+    </div>
+    <div class="hero-agave-right" aria-hidden="true">
+      <AgaveSvg width="180" height="150" className="agave-hero" />
+    </div>
+  </section>
+
+  <!-- About Teaser / Three Cultures Concept -->
+  <section class="section about-teaser" id="about-teaser">
+    <div class="container">
+      <div class="teaser-grid">
+        <div class="teaser-text reveal-left">
+          <span class="section-label">The Concept</span>
+          <h2>The Craft of Fusion</h2>
+          <p>
+            El Patrón was born from a simple observation: culinary boundaries are meant to be crossed. We bring together three distinct lineages of taste:
+          </p>
+          <div class="culture-cards">
+            <div class="culture-card">
+              <h3>Mexico</h3>
+              <p>The smoke of chipotle, the earthiness of agave, the vibrant heat of charred chilies.</p>
+            </div>
+            <div class="culture-card">
+              <h3>Italy</h3>
+              <p>The delicate craft of hand-rolled pasta, slow-simmered sauces, and sharp aged cheeses.</p>
+            </div>
+            <div class="culture-card">
+              <h3>America</h3>
+              <p>The robust, primal energy of open-flame grilling, premium cuts, and dark bourbon glazes.</p>
+            </div>
+          </div>
+          <a href={`${import.meta.env.BASE_URL}about`} class="btn btn-text">Read Our Full Story</a>
+        </div>
+        
+        <div class="teaser-visual reveal-right">
+          <div class="rustic-image-placeholder">
+            <div class="placeholder-pattern"></div>
+            <div class="placeholder-caption">
+              <h4>El Patrón Mesa</h4>
+              <p>Las Vegas, Nevada</p>
+            </div>
+            <div class="decor-cactus" aria-hidden="true">
+              <CactusSvg width="60" height="100" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="accent-line"></div>
+
+  <!-- Specials Section -->
+  <section class="section specials" id="specials">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Today's Selection</span>
+        <h2>Daily Specials</h2>
+        <p class="section-subtitle">Exquisite seasonal creations from Chef Mateo, fusing the finest ingredients daily.</p>
+      </div>
+
+      <div class="specials-grid">
+        {specials.map((dish, index) => (
+          <div class={`card special-card reveal`} style={`transition-delay: ${index * 150}ms`}>
+            <div class="special-badge">{dish.category}</div>
+            <div class="special-header-row">
+              <h3 class="special-name">{dish.name}</h3>
+              <span class="special-price">{dish.price}</span>
+            </div>
+            <p class="special-desc">{dish.description}</p>
+            <div class="special-footer">
+              <a href={`/order?add=${dish.id}`} class="special-order-link">
+                Add to Order <span>+</span>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="accent-line"></div>
+
+  <!-- Hours and Location with live status -->
+  <section class="section hours-location" id="hours-location">
+    <div class="container">
+      <div class="hours-grid">
+        <div class="location-info reveal-left">
+          <span class="section-label">Find Us</span>
+          <h2>Join Us Tonight</h2>
+          <p class="location-intro">Located in the heart of historic downtown Las Vegas, El Patrón welcomes you into a rustic sanctuary illuminated by candlelight and warm desert winds.</p>
+          
+          <div class="location-details">
+            <div class="detail-item">
+              <strong>Address</strong>
+              <p>738 Agave Neon Way, Las Vegas, NV 89109</p>
+            </div>
+            <div class="detail-item">
+              <strong>Reservations & Orders</strong>
+              <p><a href="tel:+15205550190" class="hover-underline">(520) 555-0190</a></p>
+            </div>
+          </div>
+          
+          <!-- Live Restaurant Status Widget -->
+          <div class="live-status-card" id="liveStatusCard">
+            <div class="status-indicator-dot" id="statusDot"></div>
+            <span class="status-text" id="statusText">Checking restaurant status...</span>
+          </div>
+        </div>
+
+        <div class="hours-info reveal-right">
+          <div class="rustic-hours-table">
+            <h3>Weekly Table</h3>
+            <div class="hours-row">
+              <span>Monday</span>
+              <span>4:00 PM - 10:00 PM</span>
+            </div>
+            <div class="hours-row">
+              <span>Tuesday</span>
+              <span>4:00 PM - 10:00 PM</span>
+            </div>
+            <div class="hours-row">
+              <span>Wednesday</span>
+              <span>4:00 PM - 10:00 PM</span>
+            </div>
+            <div class="hours-row">
+              <span>Thursday</span>
+              <span>4:00 PM - 10:00 PM</span>
+            </div>
+            <div class="hours-row">
+              <span>Friday</span>
+              <span>4:00 PM - 11:00 PM</span>
+            </div>
+            <div class="hours-row">
+              <span>Saturday</span>
+              <span>4:00 PM - 11:00 PM</span>
+            </div>
+            <div class="hours-row">
+              <span>Sunday</span>
+              <span class="brunch-dinner-split">
+                <span>11:00 AM - 3:00 PM <small>(Brunch)</small></span>
+                <span>4:00 PM - 9:00 PM <small>(Dinner)</small></span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* Hero Styles */
+  .hero {
+    height: 90vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 4rem;
+  }
+
+  .hero-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      linear-gradient(to bottom, transparent 60%, var(--color-bg) 100%),
+      radial-gradient(ellipse at center, rgba(204, 106, 44, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .hero-container {
+    position: relative;
+    z-index: 5;
+  }
+
+  .hero-content {
+    max-width: 650px;
+  }
+
+  .hero-tagline {
+    display: block;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--color-accent);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    margin-bottom: 2rem;
+    line-height: 1.1;
+  }
+
+  .text-gradient {
+    color: var(--color-gold);
+    font-style: italic;
+  }
+
+  .hero-desc {
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+    line-height: 1.7;
+    max-width: 580px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  /* Scroll Indicator */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text-dark);
+    z-index: 5;
+    transition: color var(--transition-fast);
+  }
+
+  .scroll-indicator:hover {
+    color: var(--color-accent);
+  }
+
+  .scroll-mouse {
+    width: 20px;
+    height: 32px;
+    border: 1px solid currentColor;
+    border-radius: 12px;
+    position: relative;
+    display: block;
+  }
+
+  .scroll-wheel {
+    width: 2px;
+    height: 6px;
+    background-color: currentColor;
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 1px;
+    animation: scroll-wheel-anim 1.6s infinite;
+  }
+
+  .scroll-arrow {
+    width: 6px;
+    height: 6px;
+    border-right: 1px solid currentColor;
+    border-bottom: 1px solid currentColor;
+    transform: rotate(45deg);
+    animation: scroll-arrow-anim 1.6s infinite;
+  }
+
+  @keyframes scroll-wheel-anim {
+    0% { transform: translate(-50%, 0); opacity: 1; }
+    80% { transform: translate(-50%, 10px); opacity: 0; }
+    100% { transform: translate(-50%, 0); opacity: 0; }
+  }
+
+  @keyframes scroll-arrow-anim {
+    0% { opacity: 0.3; }
+    50% { opacity: 1; }
+    100% { opacity: 0.3; }
+  }
+
+  /* Silhouettes positioning */
+  .hero-cactus-left {
+    position: absolute;
+    bottom: -10px;
+    left: 8%;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .hero-agave-right {
+    position: absolute;
+    bottom: -20px;
+    right: 6%;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  /* Teaser Section */
+  .teaser-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .section-label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  .teaser-text h2 {
+    margin-bottom: 2rem;
+  }
+
+  .teaser-text p {
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+  }
+
+  .culture-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .culture-card {
+    border-left: 2px solid var(--color-border);
+    padding-left: 1.5rem;
+    transition: border-color var(--transition-normal);
+  }
+
+  .culture-card:hover {
+    border-color: var(--color-accent);
+  }
+
+  .culture-card h3 {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text);
+    margin-bottom: 0.4rem;
+  }
+
+  .culture-card p {
+    font-size: 0.9rem;
+    margin-bottom: 0;
+  }
+
+  /* Image Placeholder Design */
+  .rustic-image-placeholder {
+    width: 100%;
+    aspect-ratio: 4/5;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 3rem;
+    overflow: hidden;
+  }
+
+  .placeholder-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      radial-gradient(rgba(204, 106, 44, 0.15) 1px, transparent 1px),
+      radial-gradient(rgba(91, 112, 101, 0.1) 1.5px, transparent 1.5px);
+    background-size: 24px 24px;
+    background-position: 0 0, 12px 12px;
+    opacity: 0.2;
+    transition: opacity var(--transition-slow);
+  }
+
+  .rustic-image-placeholder:hover .placeholder-pattern {
+    opacity: 0.4;
+  }
+
+  .placeholder-caption {
+    position: relative;
+    z-index: 5;
+    border-top: 1px solid var(--color-border);
+    padding-top: 1.5rem;
+  }
+
+  .placeholder-caption h4 {
+    font-size: 1.4rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .placeholder-caption p {
+    font-size: 0.85rem;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .decor-cactus {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    z-index: 2;
+  }
+
+  /* Specials Section */
+  .section-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 4.5rem auto;
+  }
+
+  .section-header h2 {
+    margin-bottom: 1rem;
+  }
+
+  .section-subtitle {
+    font-size: 1.05rem;
+  }
+
+  .specials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+  }
+
+  .special-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+  }
+
+  .special-badge {
+    position: absolute;
+    top: -12px;
+    left: 2rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    padding: 0.2rem 0.8rem;
+    font-size: 0.65rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+  }
+
+  .special-card:hover .special-badge {
+    border-color: var(--color-accent);
+  }
+
+  .special-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .special-name {
+    font-size: 1.5rem;
+    line-height: 1.2;
+    color: var(--color-text);
+  }
+
+  .special-price {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--color-gold);
+  }
+
+  .special-desc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+  }
+
+  .special-footer {
+    border-top: 1px solid var(--color-border);
+    padding-top: 1.5rem;
+  }
+
+  .special-card:hover .special-footer {
+    border-top-color: var(--color-border-focus);
+  }
+
+  .special-order-link {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color var(--transition-fast);
+  }
+
+  .special-order-link span {
+    font-size: 1.2rem;
+    color: var(--color-accent);
+    transition: transform var(--transition-fast);
+  }
+
+  .special-card:hover .special-order-link {
+    color: var(--color-text);
+  }
+
+  .special-card:hover .special-order-link span {
+    transform: rotate(90deg) scale(1.1);
+  }
+
+  /* Hours and Location */
+  .hours-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .location-info h2 {
+    margin-bottom: 2.5rem;
+  }
+
+  .location-intro {
+    font-size: 1.05rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .location-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .detail-item strong {
+    display: block;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .detail-item p {
+    font-size: 1rem;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .hover-underline {
+    position: relative;
+  }
+  .hover-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--color-accent);
+    transition: width var(--transition-fast);
+  }
+  .hover-underline:hover::after {
+    width: 100%;
+  }
+
+  /* Live status card */
+  .live-status-card {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.8rem 1.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    margin-top: 1rem;
+    transition: border-color var(--transition-normal);
+  }
+
+  .status-indicator-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--color-text-dark);
+  }
+
+  .status-indicator-dot.open {
+    background-color: #52b788;
+    box-shadow: 0 0 8px rgba(82, 183, 136, 0.6);
+    animation: status-pulse 2s infinite;
+  }
+
+  .status-indicator-dot.closed {
+    background-color: #e63946;
+    box-shadow: 0 0 8px rgba(230, 57, 70, 0.4);
+  }
+
+  .status-text {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+  }
+
+  @keyframes status-pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.6; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  /* Hours Table */
+  .rustic-hours-table {
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border);
+    padding: 3rem;
+    position: relative;
+  }
+
+  .rustic-hours-table::before {
+    content: '';
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    border: 1px dashed rgba(34, 28, 24, 0.2);
+    pointer-events: none;
+  }
+
+  .rustic-hours-table h3 {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    color: var(--color-gold);
+    font-size: 1.6rem;
+  }
+
+  .hours-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 0.95rem;
+    align-items: flex-start;
+  }
+
+  .hours-row:last-of-type {
+    border-bottom: none;
+  }
+
+  .hours-row span:first-child {
+    font-weight: 400;
+    color: var(--color-text);
+  }
+
+  .hours-row span:last-child {
+    color: var(--color-text-muted);
+    font-weight: 300;
+    text-align: right;
+  }
+
+  .brunch-dinner-split {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .brunch-dinner-split small {
+    font-size: 0.75rem;
+    color: var(--color-text-dark);
+    margin-left: 0.25rem;
+  }
+
+  /* Responsive styling */
+  @media (max-width: 900px) {
+    .teaser-grid, .hours-grid {
+      grid-template-columns: 1fr;
+      gap: 3.5rem;
+    }
+    .teaser-visual {
+      order: -1;
+    }
+    .rustic-image-placeholder {
+      aspect-ratio: 16/9;
+      padding: 2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      height: auto;
+      min-height: 80vh;
+      padding: 6rem 0 4rem 0;
+    }
+
+    .hero-cactus-left, .hero-agave-right {
+      opacity: 0.15;
+    }
+
+    .scroll-indicator {
+      display: none;
+    }
+
+    .hero-actions {
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+    }
+
+    .hero-actions .btn {
+      width: 100%;
+    }
+
+    .rustic-hours-table {
+      padding: 2rem 1.5rem;
+    }
+  }
+</style>
+
+<script>
+  // Dynamic Nevada Hours Checker
+  function checkNevadaStatus() {
+    const statusText = document.getElementById('statusText');
+    const statusDot = document.getElementById('statusDot');
+    const liveCard = document.getElementById('liveStatusCard');
+
+    if (!statusText || !statusDot || !liveCard) return;
+
+    // Las Vegas is in the Pacific Time Zone (PST/PDT).
+    // Using America/Los_Angeles timezone to automatically handle PST/PDT transitions.
+    const now = new Date();
+    const nvString = now.toLocaleString("en-US", { timeZone: "America/Los_Angeles" });
+    const nvTime = new Date(nvString);
+
+    const day = nvTime.getDay(); // 0 is Sunday, 1 is Monday, etc.
+    const hours = nvTime.getHours();
+    const minutes = nvTime.getMinutes();
+    const currentMinutes = (hours * 60) + minutes;
+
+    let isOpen = false;
+    let nextStateMsg = "";
+
+    // Hours in minutes:
+    // Mon-Thu: 4:00 PM - 10:00 PM (16:00 - 22:00 -> 960 to 1320 mins)
+    // Fri-Sat: 4:00 PM - 11:00 PM (16:00 - 23:00 -> 960 to 1380 mins)
+    // Sun: 11:00 AM - 3:00 PM (11:00 - 15:00 -> 660 to 900 mins) AND 4:00 PM - 9:00 PM (16:00 - 21:00 -> 960 to 1260 mins)
+
+    const openTimeDinner = 16 * 60; // 4:00 PM
+    const closeTimeWeek = 22 * 60;  // 10:00 PM
+    const closeTimeWeekend = 23 * 60; // 11:00 PM
+
+    if (day >= 1 && day <= 4) {
+      // Monday - Thursday
+      if (currentMinutes >= openTimeDinner && currentMinutes < closeTimeWeek) {
+        isOpen = true;
+      }
+      nextStateMsg = isOpen ? "Open tonight until 10:00 PM" : "Opens today at 4:00 PM";
+    } else if (day === 5 || day === 6) {
+      // Friday - Saturday
+      if (currentMinutes >= openTimeDinner && currentMinutes < closeTimeWeekend) {
+        isOpen = true;
+      }
+      nextStateMsg = isOpen ? "Open tonight until 11:00 PM" : "Opens today at 4:00 PM";
+    } else if (day === 0) {
+      // Sunday
+      const sunBrunchOpen = 11 * 60;
+      const sunBrunchClose = 15 * 60;
+      const sunDinnerOpen = 16 * 60;
+      const sunDinnerClose = 21 * 60;
+
+      if ((currentMinutes >= sunBrunchOpen && currentMinutes < sunBrunchClose)) {
+        isOpen = true;
+        nextStateMsg = "Open for Sunday Brunch until 3:00 PM";
+      } else if (currentMinutes >= sunDinnerOpen && currentMinutes < sunDinnerClose) {
+        isOpen = true;
+        nextStateMsg = "Open for Sunday Dinner until 9:00 PM";
+      } else {
+        isOpen = false;
+        if (currentMinutes < sunBrunchOpen) {
+          nextStateMsg = "Opens today at 11:00 AM for Brunch";
+        } else if (currentMinutes < sunDinnerOpen) {
+          nextStateMsg = "Opens today at 4:00 PM for Dinner";
+        } else {
+          nextStateMsg = "Closed for the night. Opens tomorrow at 4:00 PM";
+        }
+      }
+    }
+
+    if (isOpen) {
+      statusDot.className = 'status-indicator-dot open';
+      statusText.innerHTML = `Currently <span style="color: #52b788; font-weight: 600;">Open</span> &bull; ${nextStateMsg}`;
+      liveCard.style.borderColor = 'rgba(82, 183, 136, 0.3)';
+    } else {
+      statusDot.className = 'status-indicator-dot closed';
+      statusText.innerHTML = `Currently <span style="color: #e63946; font-weight: 600;">Closed</span> &bull; ${nextStateMsg}`;
+      liveCard.style.borderColor = 'rgba(230, 57, 70, 0.2)';
+    }
+  }
+
+  // Run immediately and on view transitions
+  checkNevadaStatus();
+  document.addEventListener('astro:page-load', checkNevadaStatus);
+</script>

@@ -1,0 +1,535 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = "El Patron | Fine Mexican-Italian-American Fusion", 
+  description = "Experience the culinary synthesis of three cultures: Mexican, Italian, and American. Premium wood-fired grilling and fine mezcal in a rustic, minimal desert setting." 
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
+    <link rel="icon" href={`${import.meta.env.BASE_URL}favicon.ico`} />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <ClientRouter />
+  </head>
+  <body>
+    <!-- Immersive Background Desert Effect -->
+    <div class="ambient-glow" aria-hidden="true"></div>
+
+    <header class="header">
+      <div class="container header-container">
+        <a href={import.meta.env.BASE_URL} class="logo">
+          EL PATRÓN
+          <span class="logo-subtitle">Mesa Fusion</span>
+        </a>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav class="nav" id="navMenu">
+          <ul class="nav-list">
+            <li><a href={import.meta.env.BASE_URL} class="nav-link">Home</a></li>
+            <li><a href={`${import.meta.env.BASE_URL}about`} class="nav-link">About</a></li>
+            <li><a href={`${import.meta.env.BASE_URL}menu`} class="nav-link">Menu</a></li>
+            <li><a href={`${import.meta.env.BASE_URL}order`} class="btn btn-secondary nav-order-btn">
+              Order Online
+              <span class="cart-badge-container" id="cartBadgeContainer">
+                <span class="cart-badge" id="cartBadge">0</span>
+              </span>
+            </a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <slot />
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <h3 class="footer-title">EL PATRÓN</h3>
+          <p class="footer-concept">Three Cultures. One Flavor.</p>
+          <div class="desert-icon-container">
+            <svg class="agave-svg" width="60" height="40" viewBox="0 0 60 40">
+              <path d="M30,38 C28,25 22,12 10,12 C18,16 24,24 26,38 C26,24 16,8 5,4 C14,8 22,18 24,38 C26,20 20,4 12,2 C22,4 28,14 30,38 C32,14 38,4 48,2 C40,4 34,20 36,38 C38,18 46,8 55,4 C44,8 34,24 34,38 C36,24 42,16 50,12 C38,12 32,25 30,38 Z"></path>
+            </svg>
+          </div>
+        </div>
+
+        <div class="footer-hours">
+          <h4>Hours</h4>
+          <ul>
+            <li><span>Monday - Thursday</span><span>4:00 PM - 10:00 PM</span></li>
+            <li><span>Friday - Saturday</span><span>4:00 PM - 11:00 PM</span></li>
+            <li><span>Sunday Brunch</span><span>11:00 AM - 3:00 PM</span></li>
+            <li><span>Sunday Dinner</span><span>4:00 PM - 9:00 PM</span></li>
+          </ul>
+        </div>
+
+        <div class="footer-contact">
+          <h4>Contact & Location</h4>
+          <p class="footer-address">
+            738 Agave Neon Way<br />
+            Las Vegas, Nevada 89109
+          </p>
+          <p class="footer-phone">
+            <a href="tel:+15205550190">(520) 555-0190</a>
+          </p>
+          <p class="footer-email">
+            <a href="mailto:hola@elpatronmesa.com">hola@elpatronmesa.com</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="container footer-bottom">
+        <p>&copy; {new Date().getFullYear()} El Patrón Restaurant. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <style is:global>
+      /* Header & Navigation Styles */
+      .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: var(--header-height);
+        z-index: 100;
+        background: rgba(11, 9, 8, 0.75);
+        backdrop-filter: blur(16px) saturate(120%);
+        border-bottom: 1px solid rgba(34, 28, 24, 0.5);
+        display: flex;
+        align-items: center;
+        transition: background var(--transition-normal);
+      }
+
+      .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+      }
+
+      .logo {
+        font-family: var(--font-display);
+        font-size: 1.6rem;
+        letter-spacing: 0.15em;
+        color: var(--color-text);
+        display: flex;
+        flex-direction: column;
+        line-height: 1;
+      }
+
+      .logo-subtitle {
+        font-family: var(--font-body);
+        font-size: 0.65rem;
+        letter-spacing: 0.3em;
+        color: var(--color-accent);
+        text-transform: uppercase;
+        margin-top: 0.2rem;
+        font-weight: 400;
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+      }
+
+      .nav-list {
+        display: flex;
+        list-style: none;
+        align-items: center;
+        gap: 2.5rem;
+      }
+
+      .nav-link {
+        font-family: var(--font-body);
+        font-size: 0.85rem;
+        font-weight: 400;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-text-muted);
+        position: relative;
+        padding: 0.5rem 0;
+      }
+
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background-color: var(--color-accent);
+        transition: width var(--transition-normal);
+      }
+
+      .nav-link:hover {
+        color: var(--color-text);
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      .nav-order-btn {
+        font-size: 0.75rem !important;
+        padding: 0.6rem 1.4rem !important;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .cart-badge-container {
+        display: inline-flex;
+        background: var(--color-accent);
+        color: var(--color-text);
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.65rem;
+        font-weight: 700;
+      }
+
+      /* Navigation Mobile Toggle */
+      .nav-toggle {
+        display: none;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 24px;
+        height: 16px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        z-index: 110;
+      }
+
+      .nav-toggle span {
+        width: 100%;
+        height: 1px;
+        background-color: var(--color-text);
+        transition: all var(--transition-normal);
+      }
+
+      /* Ambient Background Glow */
+      .ambient-glow {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: 
+          radial-gradient(circle at 10% 20%, rgba(204, 106, 44, 0.04) 0%, transparent 40%),
+          radial-gradient(circle at 90% 80%, rgba(91, 112, 101, 0.03) 0%, transparent 55%),
+          radial-gradient(circle at 50% 50%, rgba(221, 161, 94, 0.02) 0%, transparent 60%);
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      /* Main Content Layout */
+      .main-content {
+        flex: 1;
+        margin-top: var(--header-height);
+      }
+
+      /* Footer Styles */
+      .footer {
+        background-color: #080605;
+        border-top: 1px solid var(--color-border);
+        padding: 5rem 0 2rem 0;
+        color: var(--color-text-muted);
+        position: relative;
+        z-index: 10;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1.5fr 1.2fr 1.3fr;
+        gap: 4rem;
+        margin-bottom: 4rem;
+      }
+
+      .footer-brand {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .footer-title {
+        color: var(--color-text);
+        letter-spacing: 0.2em;
+        margin-bottom: 0.5rem;
+        font-size: 1.8rem;
+      }
+
+      .footer-concept {
+        font-size: 0.85rem;
+        color: var(--color-accent);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 1.5rem;
+      }
+
+      .desert-icon-container {
+        margin-top: auto;
+      }
+
+      .footer h4 {
+        color: var(--color-text);
+        font-family: var(--font-body);
+        font-size: 0.85rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        margin-bottom: 1.5rem;
+        position: relative;
+        padding-bottom: 0.5rem;
+      }
+
+      .footer h4::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 30px;
+        height: 1px;
+        background-color: var(--color-accent);
+      }
+
+      .footer-hours ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .footer-hours li {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.9rem;
+        font-weight: 300;
+        border-bottom: 1px dashed rgba(34, 28, 24, 0.4);
+        padding-bottom: 0.25rem;
+      }
+
+      .footer-hours li span:last-child {
+        color: var(--color-text);
+      }
+
+      .footer-contact {
+        font-size: 0.9rem;
+      }
+
+      .footer-address {
+        margin-bottom: 1rem;
+        line-height: 1.8;
+      }
+
+      .footer-phone, .footer-email {
+        margin-bottom: 0.5rem;
+      }
+
+      .footer-phone a:hover, .footer-email a:hover {
+        color: var(--color-accent);
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(34, 28, 24, 0.4);
+        padding-top: 2rem;
+        display: flex;
+        justify-content: center;
+        font-size: 0.8rem;
+        font-weight: 300;
+        color: var(--color-text-dark);
+      }
+
+      /* Responsive Layouts */
+      @media (max-width: 900px) {
+        .footer-grid {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+        }
+        
+        .desert-icon-container {
+          margin-top: 1.5rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .nav-toggle {
+          display: flex;
+        }
+
+        .nav {
+          position: fixed;
+          top: var(--header-height);
+          left: 0;
+          width: 100vw;
+          height: calc(100vh - var(--header-height));
+          background: rgba(11, 9, 8, 0.95);
+          backdrop-filter: blur(20px);
+          z-index: 100;
+          display: none;
+          justify-content: center;
+          align-items: center;
+          border-top: 1px solid var(--color-border);
+          transform: translateY(-10px);
+          opacity: 0;
+          transition: transform var(--transition-normal), opacity var(--transition-normal);
+        }
+
+        .nav.active {
+          display: flex;
+          transform: translateY(0);
+          opacity: 1;
+        }
+
+        .nav-list {
+          flex-direction: column;
+          gap: 3rem;
+          text-align: center;
+        }
+
+        .nav-link {
+          font-size: 1.2rem;
+        }
+
+        .nav-toggle.active span:nth-child(1) {
+          transform: translateY(7px) rotate(45deg);
+        }
+
+        .nav-toggle.active span:nth-child(2) {
+          transform: translateY(-8px) rotate(-45deg);
+        }
+      }
+    </style>
+
+    <script>
+      // Function to initialize interactive parts of the page.
+      // Needs to run on initial load and on Astro view transitions.
+      function initApp() {
+        // --- 1. Mobile Menu ---
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        if (navToggle && navMenu) {
+          // Reset states
+          navToggle.classList.remove('active');
+          navMenu.classList.remove('active');
+          navMenu.style.display = '';
+
+          navToggle.onclick = () => {
+            navToggle.classList.toggle('active');
+            if (navMenu.classList.contains('active')) {
+              navMenu.classList.remove('active');
+              setTimeout(() => {
+                if (!navMenu.classList.contains('active')) {
+                  navMenu.style.display = 'none';
+                }
+              }, 400); // match transition speed
+            } else {
+              navMenu.style.display = 'flex';
+              // Trigger reflow for transition
+              void navMenu.offsetWidth;
+              navMenu.classList.add('active');
+            }
+          };
+
+          // Close menu when clicking nav links
+          const navLinks = navMenu.querySelectorAll('a');
+          navLinks.forEach(link => {
+            link.onclick = () => {
+              navToggle.classList.remove('active');
+              navMenu.classList.remove('active');
+              setTimeout(() => {
+                navMenu.style.display = 'none';
+              }, 400);
+            };
+          });
+        }
+
+        // --- 2. Scroll Reveal Observer ---
+        const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+        
+        if ('IntersectionObserver' in window && revealElements.length > 0) {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                // Once it is revealed, we can unobserve
+                observer.unobserve(entry.target);
+              }
+            });
+          }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px' // reveal slightly before entering viewport fully
+          });
+
+          revealElements.forEach(el => observer.observe(el));
+        } else {
+          // Fallback if IntersectionObserver not supported
+          revealElements.forEach(el => el.classList.add('active'));
+        }
+
+        // --- 3. Cart Badge Indicator ---
+        updateCartBadge();
+      }
+
+      function updateCartBadge() {
+        const badge = document.getElementById('cartBadge');
+        if (badge) {
+          try {
+            const cartData = localStorage.getItem('el_patron_cart');
+            if (cartData) {
+              const cart = JSON.parse(cartData);
+              const count = cart.reduce((total: number, item: any) => total + item.quantity, 0);
+              badge.textContent = count.toString();
+              
+              const container = document.getElementById('cartBadgeContainer');
+              if (container) {
+                if (count > 0) {
+                  container.style.display = 'inline-flex';
+                } else {
+                  container.style.display = 'none';
+                }
+              }
+            } else {
+              badge.textContent = '0';
+              const container = document.getElementById('cartBadgeContainer');
+              if (container) container.style.display = 'none';
+            }
+          } catch (e) {
+            console.error('Error updating cart badge', e);
+          }
+        }
+      }
+
+      // Initialize on load
+      initApp();
+
+      // Re-initialize when Astro performs a page navigation
+      document.addEventListener('astro:page-load', initApp);
+
+      // Listen for custom events to update the cart count
+      window.addEventListener('cart-updated', updateCartBadge);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,689 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CactusSvg from '../components/CactusSvg.astro';
+
+// Menu Categories and Items
+const menuData = {
+  starters: [
+    {
+      id: 'start-1',
+      name: 'Mezcal-Cured Ceviche',
+      price: 19,
+      description: 'Fresh sea bass cured in artisanal Mezcal and lime, blood orange segments, serrano chili, finished with cold-pressed Italian olive oil.',
+      tags: ['GF', 'Signature'],
+      cultures: 'Mexican-Italian'
+    },
+    {
+      id: 'start-2',
+      name: 'Charred Heirloom Caprese',
+      price: 17,
+      description: 'Thick-sliced heirloom tomatoes, fresh buffalo mozzarella, wild basil, finished with a fire-roasted chipotle glaze and desert salt.',
+      tags: ['GF', 'V'],
+      cultures: 'Mexican-Italian'
+    },
+    {
+      id: 'start-3',
+      name: 'Mesquite Wood Smoked Meatballs',
+      price: 16,
+      description: 'Prime angus beef meatballs smoked over mesquite, rich tomato-guajillo marinara, shaved aged pecorino, toasted rustic sourdough.',
+      tags: [],
+      cultures: 'Mexican-Italian-American'
+    },
+    {
+      id: 'start-4',
+      name: 'Crispy Calabrian Calamari',
+      price: 18,
+      description: 'Crisp calamari rings dusted in cornmeal and spices, served with a charred jalapeño-garlic aioli and grilled lime.',
+      tags: [],
+      cultures: 'Mexican-Italian-American'
+    }
+  ],
+  mains: [
+    {
+      id: 'main-1',
+      name: 'Birria Gnocchi',
+      price: 28,
+      description: 'Slow-braised beef birria, hand-rolled potato gnocchi, cotija cheese, fresh cilantro oil, and rich consommé drizzle.',
+      tags: ['Signature'],
+      cultures: 'Mexican-Italian'
+    },
+    {
+      id: 'main-2',
+      name: 'Smoked Ancho Ribeye',
+      price: 48,
+      description: '16oz wood-fired dry-aged ribeye, smoked ancho chili rub, bone marrow butter, served with grilled agave-glazed scallions.',
+      tags: ['GF'],
+      cultures: 'Mexican-American'
+    },
+    {
+      id: 'main-3',
+      name: 'Chipotle Cacio e Pepe',
+      price: 24,
+      description: 'Fresh artisanal spaghetti, pecorino romano, toasted black pepper, chipotle-infused olive oil, and charred corn dust.',
+      tags: ['V'],
+      cultures: 'Mexican-Italian'
+    },
+    {
+      id: 'main-4',
+      name: 'Tequila Lime Salmon',
+      price: 34,
+      description: 'Wood-fired Atlantic salmon finished with a tequila-lime glaze, served over a bed of creamy roasted poblano polenta.',
+      tags: ['GF'],
+      cultures: 'Mexican-Italian-American'
+    },
+    {
+      id: 'main-5',
+      name: 'Guajillo Braised Short Rib',
+      price: 38,
+      description: '24-hour beef short rib, red wine-guajillo reduction, mascarpone polenta, and caramelized roasted baby carrots.',
+      tags: ['GF'],
+      cultures: 'Mexican-Italian-American'
+    }
+  ],
+  drinks: [
+    {
+      id: 'drink-1',
+      name: 'The Patrón Margarita',
+      price: 16,
+      description: 'Reposado tequila, wild agave nectar, fresh lime juice, orange liqueur, finished with a smoked black lava salt rim.',
+      tags: ['Signature'],
+      cultures: 'Mexican-American'
+    },
+    {
+      id: 'drink-2',
+      name: 'Oaxacan Boulevardier',
+      price: 17,
+      description: 'Mezcal espadín, Campari, sweet vermouth, served over a large crystal clear cube with an expressed orange peel.',
+      tags: [],
+      cultures: 'Mexican-Italian'
+    },
+    {
+      id: 'drink-3',
+      name: 'Desert Sage Old Fashioned',
+      price: 18,
+      description: 'Straight rye whiskey, house-infused smoked sage syrup, angostura bitters, flamed orange twist.',
+      tags: [],
+      cultures: 'American-Desert'
+    },
+    {
+      id: 'drink-4',
+      name: 'Agave Spritz',
+      price: 15,
+      description: 'Sparkling Italian Prosecco, artisanal mezcal, freshly squeezed lime, mineral water, fresh mint sprig.',
+      tags: [],
+      cultures: 'Mexican-Italian'
+    }
+  ]
+};
+---
+
+<Layout title="Menu | El Patrón Mesa">
+  <!-- Menu Hero -->
+  <section class="menu-hero">
+    <div class="container menu-hero-container">
+      <span class="section-label reveal">Culinary Selection</span>
+      <h1 class="reveal">The Menu</h1>
+      <p class="menu-hero-lead reveal">
+        A curated dialogue of textures and spices. Hover over dishes to discover their cultural synthesis.
+      </p>
+    </div>
+  </section>
+
+  <!-- Interactive Menu Section -->
+  <section class="section menu-section">
+    <div class="container">
+      <!-- Category Selection Tabs -->
+      <div class="menu-tabs-container reveal">
+        <div class="menu-tabs">
+          <button class="menu-tab-btn active" data-target="all">All Items</button>
+          <button class="menu-tab-btn" data-target="starters">Antojitos <small>Starters</small></button>
+          <button class="menu-tab-btn" data-target="mains">Especialidades <small>Mains</small></button>
+          <button class="menu-tab-btn" data-target="drinks">Bebidas <small>Mezcals &amp; Spirits</small></button>
+        </div>
+      </div>
+
+      <!-- Menu Grid Lists -->
+      <div class="menu-display-container">
+        <!-- Antojitos (Starters) -->
+        <div class="menu-category-block active" id="starters-category">
+          <h2 class="category-heading reveal">Antojitos <span class="category-sub">Starters</span></h2>
+          <div class="menu-list">
+            {menuData.starters.map((item, index) => (
+              <div class="menu-item-row reveal" style={`transition-delay: ${index * 80}ms`} data-item-id={item.id}>
+                <div class="menu-item-main">
+                  <div class="menu-item-title-row">
+                    <h3 class="menu-item-name">{item.name}</h3>
+                    <span class="menu-item-line"></span>
+                    <span class="menu-item-price">${item.price}</span>
+                  </div>
+                  <p class="menu-item-desc">{item.description}</p>
+                  <div class="menu-item-meta">
+                    <span class="menu-item-culture">{item.cultures}</span>
+                    <div class="menu-item-tags">
+                      {item.tags.map(tag => <span class="menu-tag">{tag}</span>)}
+                    </div>
+                  </div>
+                </div>
+                <div class="menu-item-actions">
+                  <button 
+                    class="btn-add-cart" 
+                    data-id={item.id} 
+                    data-name={item.name} 
+                    data-price={item.price}
+                    aria-label={`Add ${item.name} to order`}
+                  >
+                    Add
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Especialidades (Mains) -->
+        <div class="menu-category-block active" id="mains-category">
+          <h2 class="category-heading reveal">Especialidades <span class="category-sub">Mains</span></h2>
+          <div class="menu-list">
+            {menuData.mains.map((item, index) => (
+              <div class="menu-item-row reveal" style={`transition-delay: ${index * 80}ms`} data-item-id={item.id}>
+                <div class="menu-item-main">
+                  <div class="menu-item-title-row">
+                    <h3 class="menu-item-name">{item.name}</h3>
+                    <span class="menu-item-line"></span>
+                    <span class="menu-item-price">${item.price}</span>
+                  </div>
+                  <p class="menu-item-desc">{item.description}</p>
+                  <div class="menu-item-meta">
+                    <span class="menu-item-culture">{item.cultures}</span>
+                    <div class="menu-item-tags">
+                      {item.tags.map(tag => <span class="menu-tag">{tag}</span>)}
+                    </div>
+                  </div>
+                </div>
+                <div class="menu-item-actions">
+                  <button 
+                    class="btn-add-cart" 
+                    data-id={item.id} 
+                    data-name={item.name} 
+                    data-price={item.price}
+                    aria-label={`Add ${item.name} to order`}
+                  >
+                    Add
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Bebidas (Drinks) -->
+        <div class="menu-category-block active" id="drinks-category">
+          <h2 class="category-heading reveal">Bebidas <span class="category-sub">Mezcals &amp; Spirits</span></h2>
+          <div class="menu-list">
+            {menuData.drinks.map((item, index) => (
+              <div class="menu-item-row reveal" style={`transition-delay: ${index * 80}ms`} data-item-id={item.id}>
+                <div class="menu-item-main">
+                  <div class="menu-item-title-row">
+                    <h3 class="menu-item-name">{item.name}</h3>
+                    <span class="menu-item-line"></span>
+                    <span class="menu-item-price">${item.price}</span>
+                  </div>
+                  <p class="menu-item-desc">{item.description}</p>
+                  <div class="menu-item-meta">
+                    <span class="menu-item-culture">{item.cultures}</span>
+                    <div class="menu-item-tags">
+                      {item.tags.map(tag => <span class="menu-tag">{tag}</span>)}
+                    </div>
+                  </div>
+                </div>
+                <div class="menu-item-actions">
+                  <button 
+                    class="btn-add-cart" 
+                    data-id={item.id} 
+                    data-name={item.name} 
+                    data-price={item.price}
+                    aria-label={`Add ${item.name} to order`}
+                  >
+                    Add
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Decorative Desert graphic placement -->
+  <div class="menu-accent-decor" aria-hidden="true">
+    <CactusSvg width="100" height="170" />
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+</Layout>
+
+<style>
+  /* Menu Hero */
+  .menu-hero {
+    padding: clamp(6rem, 10vw, 8rem) 0 2rem 0;
+    text-align: center;
+  }
+
+  .menu-hero-container {
+    max-width: 600px;
+  }
+
+  .menu-hero-lead {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+  }
+
+  /* Tabs Navigation */
+  .menu-tabs-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5rem;
+  }
+
+  .menu-tabs {
+    display: inline-flex;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 0.4rem;
+    gap: 0.2rem;
+  }
+
+  .menu-tab-btn {
+    background: transparent;
+    border: none;
+    padding: 0.8rem 1.6rem;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .menu-tab-btn small {
+    font-size: 0.6rem;
+    opacity: 0.6;
+    margin-top: 0.15rem;
+    text-transform: capitalize;
+    letter-spacing: 0.05em;
+  }
+
+  .menu-tab-btn:hover {
+    color: var(--color-text);
+    background: rgba(34, 28, 24, 0.2);
+  }
+
+  .menu-tab-btn.active {
+    color: var(--color-text);
+    background: var(--color-border);
+    box-shadow: inset 0 0 4px rgba(0,0,0,0.4);
+  }
+
+  /* Category sections styling */
+  .menu-category-block {
+    margin-bottom: 6rem;
+    transition: opacity var(--transition-normal), transform var(--transition-normal);
+  }
+
+  .menu-category-block.hidden {
+    display: none;
+  }
+
+  .category-heading {
+    margin-bottom: 3.5rem;
+    border-left: 2px solid var(--color-accent);
+    padding-left: 1.5rem;
+    font-size: 2.2rem;
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  .category-sub {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-dark);
+    font-weight: 500;
+  }
+
+  /* Menu lists */
+  .menu-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .menu-item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--color-border);
+    transition: border-color var(--transition-normal);
+  }
+
+  .menu-item-row:hover {
+    border-bottom-color: var(--color-border-focus);
+  }
+
+  .menu-item-main {
+    flex-grow: 1;
+  }
+
+  .menu-item-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.75rem;
+  }
+
+  .menu-item-name {
+    font-family: var(--font-body);
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--color-text);
+    letter-spacing: 0.02em;
+    transition: color var(--transition-fast);
+  }
+
+  .menu-item-row:hover .menu-item-name {
+    color: var(--color-gold);
+  }
+
+  .menu-item-line {
+    flex-grow: 1;
+    height: 1px;
+    border-bottom: 1px dashed rgba(110, 101, 95, 0.2);
+    margin: 0 1.5rem;
+  }
+
+  .menu-item-price {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--color-text);
+  }
+
+  .menu-item-desc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    max-width: 80%;
+    margin-bottom: 1rem;
+  }
+
+  .menu-item-meta {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .menu-item-culture {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    font-weight: 500;
+  }
+
+  .menu-item-tags {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .menu-tag {
+    font-size: 0.65rem;
+    background: var(--color-surface);
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border);
+    padding: 0.15rem 0.5rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-radius: 1px;
+  }
+
+  /* Cart Add Button styling */
+  .menu-item-actions {
+    align-self: center;
+  }
+
+  .btn-add-cart {
+    background: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.6rem 1.4rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all var(--transition-normal);
+  }
+
+  .btn-add-cart:hover {
+    border-color: var(--color-accent);
+    color: var(--color-text);
+    background: var(--color-surface-hover);
+    box-shadow: 0 4px 12px rgba(204, 106, 44, 0.15);
+    transform: translateY(-1px);
+  }
+
+  .btn-add-cart:active {
+    transform: scale(0.95);
+  }
+
+  /* Decorative elements placement */
+  .menu-accent-decor {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.15;
+  }
+
+  /* Toast Notification */
+  .toast-container {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .menu-tabs-container {
+      margin-bottom: 3rem;
+    }
+
+    .menu-tabs {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem;
+      width: 100%;
+      background: transparent;
+      border: none;
+      padding: 0;
+    }
+
+    .menu-tab-btn {
+      width: 100%;
+      padding: 0.85rem 0.5rem;
+      font-size: 0.75rem;
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      border-radius: 4px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      letter-spacing: 0.05em;
+    }
+
+    .menu-tab-btn small {
+      display: none !important;
+    }
+
+    .menu-tab-btn.active {
+      background: var(--color-accent);
+      border-color: var(--color-accent);
+      color: var(--color-text);
+      box-shadow: none;
+    }
+
+    .menu-item-row {
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: stretch;
+    }
+
+    .menu-item-desc {
+      max-width: 100%;
+    }
+
+    .menu-item-actions {
+      align-self: flex-start;
+      width: 100%;
+    }
+
+    .btn-add-cart {
+      width: 100%;
+      text-align: center;
+      padding: 0.8rem;
+    }
+
+    .menu-item-line {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  // Menu interactivity (Category tabs & Quick cart add)
+  function initMenu() {
+    // --- 1. Tab Filtering ---
+    const tabButtons = document.querySelectorAll('.menu-tab-btn');
+    const categories = document.querySelectorAll('.menu-category-block');
+
+    tabButtons.forEach(btn => {
+      btn.onclick = () => {
+        const target = btn.getAttribute('data-target');
+        
+        // Update active class on tabs
+        tabButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Show/Hide categories
+        categories.forEach(cat => {
+          if (target === 'all') {
+            cat.classList.remove('hidden');
+          } else {
+            const catId = cat.id.replace('-category', '');
+            if (catId === target) {
+              cat.classList.remove('hidden');
+            } else {
+              cat.classList.add('hidden');
+            }
+          }
+        });
+      };
+    });
+
+    // --- 2. Cart Adding System ---
+    const addButtons = document.querySelectorAll('.btn-add-cart');
+    addButtons.forEach(button => {
+      button.onclick = (e) => {
+        const btn = e.currentTarget as HTMLButtonElement;
+        const id = btn.getAttribute('data-id');
+        const name = btn.getAttribute('data-name');
+        const price = parseFloat(btn.getAttribute('data-price') || '0');
+
+        if (!id || !name) return;
+
+        try {
+          // Fetch existing cart
+          const cartData = localStorage.getItem('el_patron_cart');
+          let cart = cartData ? JSON.parse(cartData) : [];
+
+          // Add or increment item
+          const existingItemIndex = cart.findIndex((item: any) => item.id === id);
+          if (existingItemIndex > -1) {
+            cart[existingItemIndex].quantity += 1;
+          } else {
+            cart.push({ id, name, price, quantity: 1 });
+          }
+
+          // Save back
+          localStorage.setItem('el_patron_cart', JSON.stringify(cart));
+
+          // Trigger Custom Event to update Layout's cart badge
+          window.dispatchEvent(new Event('cart-updated'));
+
+          // Display Toast
+          showToast(`Added ${name} to your order.`);
+        } catch (error) {
+          console.error("Cart storage issue", error);
+        }
+      };
+    });
+  }
+
+  function showToast(message: string) {
+    const container = document.getElementById('toastContainer');
+    if (!container) return;
+
+    const toast = document.createElement('div');
+    toast.style.background = 'var(--color-surface)';
+    toast.style.border = '1px solid var(--color-accent)';
+    toast.style.color = 'var(--color-text)';
+    toast.style.padding = '0.9rem 1.8rem';
+    toast.style.fontSize = '0.85rem';
+    toast.style.letterSpacing = '0.05em';
+    toast.style.textTransform = 'uppercase';
+    toast.style.boxShadow = '0 8px 24px rgba(0,0,0,0.6)';
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateY(10px)';
+    toast.style.transition = 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+    toast.textContent = message;
+
+    container.appendChild(toast);
+
+    // Fade in
+    void toast.offsetWidth;
+    toast.style.opacity = '1';
+    toast.style.transform = 'translateY(0)';
+
+    // Fade out and remove
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateY(-10px)';
+      setTimeout(() => {
+        toast.remove();
+      }, 300);
+    }, 2500);
+  }
+
+  // Initial load
+  initMenu();
+
+  // Astro page transitions load
+  document.addEventListener('astro:page-load', initMenu);
+</script>

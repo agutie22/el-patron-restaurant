@@ -1,0 +1,414 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CactusSvg from '../components/CactusSvg.astro';
+import AgaveSvg from '../components/AgaveSvg.astro';
+---
+
+<Layout title="About Us | El Patrón Mesa">
+  <!-- About Hero -->
+  <section class="about-hero">
+    <div class="hero-glow"></div>
+    <div class="container about-hero-container">
+      <span class="section-label reveal">Our Narrative</span>
+      <h1 class="reveal">Three Cultures.<br/><span class="accent-text">One Unified Flavor.</span></h1>
+      <p class="about-hero-lead reveal">
+        At El Patrón, we do not believe in culinary silos. We believe that when rich culinary lineages converge, they create something entirely new and unforgettable.
+      </p>
+    </div>
+  </section>
+
+  <!-- The Pillars Section -->
+  <section class="section pillars-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">The Roots</span>
+        <h2>The Triad of Taste</h2>
+        <p class="section-subtitle">Our menu is a conversation between three distinct culinary dynasties, brought together under one roof in downtown Las Vegas.</p>
+      </div>
+
+      <div class="pillars-grid">
+        <!-- Mexican Pillar -->
+        <div class="pillar-card reveal" style="transition-delay: 0ms;">
+          <div class="pillar-number">01</div>
+          <h3>Mexican Heritage</h3>
+          <p class="pillar-focus">Earth, Fire &amp; Smoke</p>
+          <p class="pillar-desc">
+            We honor the depth of Mexican gastronomy through our use of dried chilies (ancho, guajillo, chipotle), stone-ground heirloom corn, and agave nectar. Every plate carries the memory of smoke, earth, and complexity that has defined Mexican kitchens for centuries.
+          </p>
+        </div>
+
+        <!-- Italian Pillar -->
+        <div class="pillar-card reveal" style="transition-delay: 150ms;">
+          <div class="pillar-number">02</div>
+          <h3>Italian Artistry</h3>
+          <p class="pillar-focus">Patience, Structure &amp; Hand-Craft</p>
+          <p class="pillar-desc">
+            The foundation of Italian dining lies in the patience of execution and respect for the raw ingredient. Our kitchens roll fresh pasta daily, emulsify pecorino and black pepper with absolute precision, and highlight high-quality cold-pressed oils. It is the art of restraint.
+          </p>
+        </div>
+
+        <!-- American Pillar -->
+        <div class="pillar-card reveal" style="transition-delay: 300ms;">
+          <div class="pillar-number">03</div>
+          <h3>American Steakhouse</h3>
+          <p class="pillar-focus">Flame, Prime Cuts &amp; Scale</p>
+          <p class="pillar-desc">
+            We embrace the bold spirit of the American steakhouse with thick, dry-aged steaks, high-heat wood-fired grills, and charcoal hearths. It is a tribute to premium cuts, wood-grilling with Mojave mesquite, and a robust selection of fine rye whiskey and bourbon.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Fusion Narrative Section -->
+  <section class="section narrative-details">
+    <div class="container">
+      <div class="narrative-grid">
+        <div class="narrative-visual reveal-left">
+          <div class="about-design-element">
+            <div class="grid-crosses"></div>
+            <div class="agave-decor" aria-hidden="true">
+              <AgaveSvg width="120" height="90" />
+            </div>
+            <div class="cactus-decor" aria-hidden="true">
+              <CactusSvg width="80" height="150" />
+            </div>
+            <div class="about-quote">
+              <p>"Flavors do not replace one another; they expand the landscape of what is possible."</p>
+              <span>&mdash; Chef Mateo</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="narrative-text reveal-right">
+          <span class="section-label">Behind the Hearth</span>
+          <h2>The Synthesis of Three Worlds</h2>
+          <p>
+            When you look at our menu, you will not find Italian dishes next to Mexican dishes next to American steaks. Instead, you will find them interwoven.
+          </p>
+          <p>
+            Our signature <strong>Birria Gnocchi</strong> is a perfect example: tender potato gnocchi crafted with classic Italian technique, serving as the canvas for the deep, slow-cooked spices of a traditional Mexican beef birria. 
+          </p>
+          <p>
+            Similarly, our steaks are dry-aged in the classic American steakhouse style, but seared over Mojave mesquite wood and finished with a glaze of wild agave syrup and smoked chili flakes.
+          </p>
+          
+          <div class="story-stats">
+            <div class="stat-item">
+              <span class="stat-val">3</span>
+              <span class="stat-lbl">Heritage Cultures</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-val">100%</span>
+              <span class="stat-lbl">Mesquite Wood Fired</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-val">15+</span>
+              <span class="stat-lbl">Curated Artisanal Mezcals</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA section -->
+  <section class="section about-cta reveal">
+    <div class="container cta-container">
+      <div class="cta-card">
+        <h3>Experience The Flavor</h3>
+        <p>Book a table or order directly to taste the synthesis of Mexican, Italian, and American culinary arts.</p>
+        <div class="cta-actions">
+          <a href={`${import.meta.env.BASE_URL}menu`} class="btn btn-primary">View the Menu</a>
+          <a href={`${import.meta.env.BASE_URL}order`} class="btn btn-secondary">Order Online</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* About Hero */
+  .about-hero {
+    padding: clamp(6rem, 12vw, 10rem) 0 4rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(204, 106, 44, 0.06) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .about-hero-container {
+    position: relative;
+    z-index: 5;
+    max-width: 800px;
+    text-align: center;
+  }
+
+  .about-hero h1 {
+    margin-bottom: 2rem;
+  }
+
+  .accent-text {
+    color: var(--color-gold);
+    font-style: italic;
+  }
+
+  .about-hero-lead {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: var(--color-text-muted);
+  }
+
+  /* Pillars Section */
+  .pillars-section {
+    background: #080605;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+
+  .pillar-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    padding: 3rem 2.5rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: all var(--transition-normal);
+  }
+
+  .pillar-card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-4px);
+    background: var(--color-surface-hover);
+  }
+
+  .pillar-number {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    color: var(--color-border-focus);
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    transition: color var(--transition-normal);
+  }
+
+  .pillar-card:hover .pillar-number {
+    color: var(--color-accent);
+  }
+
+  .pillar-card h3 {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+  }
+
+  .pillar-focus {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-gold);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+  }
+
+  .pillar-desc {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-bottom: 0;
+  }
+
+  /* Narrative details section */
+  .narrative-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .narrative-text h2 {
+    margin-bottom: 2rem;
+  }
+
+  .narrative-text p {
+    font-size: 1.05rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+  }
+
+  .story-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 3rem;
+    border-top: 1px solid var(--color-border);
+    padding-top: 2rem;
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-val {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    color: var(--color-accent);
+    line-height: 1.1;
+  }
+
+  .stat-lbl {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    margin-top: 0.25rem;
+  }
+
+  /* About design element / visual placeholder */
+  .about-design-element {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    aspect-ratio: 1/1;
+    position: relative;
+    padding: 3rem;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .grid-crosses {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      radial-gradient(var(--color-border) 1px, transparent 1px);
+    background-size: 30px 30px;
+    opacity: 0.3;
+  }
+
+  .agave-decor {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+  }
+
+  .cactus-decor {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+  }
+
+  .about-quote {
+    position: relative;
+    z-index: 5;
+    border-left: 2px solid var(--color-accent);
+    padding-left: 1.5rem;
+  }
+
+  .about-quote p {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    color: var(--color-text);
+    line-height: 1.4;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+  }
+
+  .about-quote span {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-dark);
+  }
+
+  /* About CTA card */
+  .about-cta {
+    padding-top: 0;
+    margin-bottom: 4rem;
+  }
+
+  .cta-card {
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border);
+    padding: 4rem 3rem;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .cta-card::before {
+    content: '';
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    border: 1px dashed rgba(204, 106, 44, 0.15);
+    pointer-events: none;
+  }
+
+  .cta-card h3 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+  }
+
+  .cta-card p {
+    font-size: 1.05rem;
+    max-width: 500px;
+    margin: 0 auto 2.5rem auto;
+  }
+
+  .cta-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  /* Responsive layout adjustments */
+  @media (max-width: 1000px) {
+    .pillars-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .narrative-grid {
+      grid-template-columns: 1fr;
+      gap: 4rem;
+    }
+
+    .about-design-element {
+      aspect-ratio: 16/9;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .cta-actions {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .cta-actions .btn {
+      width: 100%;
+    }
+
+    .story-stats {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+  }
+</style>

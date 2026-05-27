@@ -1,0 +1,46 @@
+---
+interface Props {
+  width?: string;
+  height?: string;
+  className?: string;
+}
+
+const { width = "120", height = "200", className = "" } = Astro.props;
+---
+
+<svg 
+  width={width} 
+  height={height} 
+  viewBox="0 0 120 200" 
+  class={`cactus-svg ${className}`}
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- Main Trunk -->
+  <path d="M60,200 L60,25 C60,18 55,10 45,10 C35,10 30,18 30,25" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+  <path d="M60,200 L60,20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+  
+  <!-- Left Arm (high) -->
+  <path d="M60,90 L40,90 C32,90 25,83 25,75 L25,45 C25,38 30,30 38,30" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+  
+  <!-- Right Arm (low) -->
+  <path d="M60,130 L80,130 C88,130 95,123 95,115 L95,85 C95,78 90,70 82,70" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+
+  <!-- Ground Line / Accent -->
+  <path d="M20,195 L100,195" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"></path>
+  <path d="M40,190 L80,190" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round"></path>
+
+  <!-- Spines (Subtle details) -->
+  <!-- Main trunk spines -->
+  <line x1="60" y1="40" x2="65" y2="40" stroke="currentColor" stroke-width="1"></line>
+  <line x1="60" y1="70" x2="55" y2="70" stroke="currentColor" stroke-width="1"></line>
+  <line x1="60" y1="110" x2="65" y2="110" stroke="currentColor" stroke-width="1"></line>
+  <line x1="60" y1="150" x2="55" y2="150" stroke="currentColor" stroke-width="1"></line>
+
+  <!-- Left arm spines -->
+  <line x1="25" y1="60" x2="20" y2="60" stroke="currentColor" stroke-width="1"></line>
+  <line x1="32" y1="35" x2="32" y2="30" stroke="currentColor" stroke-width="1"></line>
+
+  <!-- Right arm spines -->
+  <line x1="95" y1="100" x2="100" y2="100" stroke="currentColor" stroke-width="1"></line>
+  <line x1="88" y1="75" x2="88" y2="70" stroke="currentColor" stroke-width="1"></line>
+</svg>
