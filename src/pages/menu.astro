@@ -83,7 +83,7 @@ const menuData = {
   drinks: [
     {
       id: 'drink-1',
-      name: 'The Patrón Margarita',
+      name: 'The Padrino Margarita',
       price: 16,
       description: 'Reposado tequila, wild agave nectar, fresh lime juice, orange liqueur, finished with a smoked black lava salt rim.',
       tags: ['Signature'],
@@ -117,7 +117,7 @@ const menuData = {
 };
 ---
 
-<Layout title="Menu | El Patrón Mesa">
+<Layout title="Menu | El Padrino Mesa">
   <!-- Menu Hero -->
   <section class="menu-hero">
     <div class="container menu-hero-container">
@@ -620,7 +620,7 @@ const menuData = {
 
         try {
           // Fetch existing cart
-          const cartData = localStorage.getItem('el_patron_cart');
+          const cartData = localStorage.getItem('el_padrino_cart');
           let cart = cartData ? JSON.parse(cartData) : [];
 
           // Add or increment item
@@ -632,7 +632,7 @@ const menuData = {
           }
 
           // Save back
-          localStorage.setItem('el_patron_cart', JSON.stringify(cart));
+          localStorage.setItem('el_padrino_cart', JSON.stringify(cart));
 
           // Trigger Custom Event to update Layout's cart badge
           window.dispatchEvent(new Event('cart-updated'));

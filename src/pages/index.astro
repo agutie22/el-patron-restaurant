@@ -40,7 +40,7 @@ const specials = [
 ];
 ---
 
-<Layout title="El Patrón | Three Cultures, One Flavor">
+<Layout title="El Padrino | Three Cultures, One Flavor">
   <!-- Hero Section -->
   <section class="hero" id="hero">
     <div class="hero-bg-overlay"></div>
@@ -49,7 +49,7 @@ const specials = [
         <span class="hero-tagline reveal">An Culinary Convergence</span>
         <h1 class="hero-title reveal">Three Cultures.<br/><span class="text-gradient">One Flavor.</span></h1>
         <p class="hero-desc reveal">
-          Where the rich heritage of Mexican spices, the timeless artistry of Italian pasta, and the bold, wood-fired hearths of the American steakhouse meet under the Las Vegas sky.
+          Where the rich heritage of Mexican spices, the timeless artistry of Italian pasta, and the bold, wood-fired hearths of the American steakhouse meet under the Pahrump sky.
         </p>
         <div class="hero-actions reveal">
           <a href={`${import.meta.env.BASE_URL}menu`} class="btn btn-primary">Explore Menu</a>
@@ -83,7 +83,7 @@ const specials = [
           <span class="section-label">The Concept</span>
           <h2>The Craft of Fusion</h2>
           <p>
-            El Patrón was born from a simple observation: culinary boundaries are meant to be crossed. We bring together three distinct lineages of taste:
+            El Padrino was born from a simple observation: culinary boundaries are meant to be crossed. We bring together three distinct lineages of taste:
           </p>
           <div class="culture-cards">
             <div class="culture-card">
@@ -106,8 +106,8 @@ const specials = [
           <div class="rustic-image-placeholder">
             <div class="placeholder-pattern"></div>
             <div class="placeholder-caption">
-              <h4>El Patrón Mesa</h4>
-              <p>Las Vegas, Nevada</p>
+              <h4>El Padrino Mesa</h4>
+              <p>Pahrump, Nevada</p>
             </div>
             <div class="decor-cactus" aria-hidden="true">
               <CactusSvg width="60" height="100" />
@@ -158,12 +158,12 @@ const specials = [
         <div class="location-info reveal-left">
           <span class="section-label">Find Us</span>
           <h2>Join Us Tonight</h2>
-          <p class="location-intro">Located in the heart of historic downtown Las Vegas, El Patrón welcomes you into a rustic sanctuary illuminated by candlelight and warm desert winds.</p>
+          <p class="location-intro">Located in Pahrump, El Padrino welcomes you into a rustic sanctuary illuminated by candlelight and warm desert winds.</p>
           
           <div class="location-details">
             <div class="detail-item">
               <strong>Address</strong>
-              <p>738 Agave Neon Way, Las Vegas, NV 89109</p>
+              <p>738 Agave Neon Way, Pahrump, NV 89048</p>
             </div>
             <div class="detail-item">
               <strong>Reservations & Orders</strong>
@@ -805,7 +805,7 @@ const specials = [
 
     if (!statusText || !statusDot || !liveCard) return;
 
-    // Las Vegas is in the Pacific Time Zone (PST/PDT).
+    // Pahrump is in the Pacific Time Zone (PST/PDT).
     // Using America/Los_Angeles timezone to automatically handle PST/PDT transitions.
     const now = new Date();
     const nvString = now.toLocaleString("en-US", { timeZone: "America/Los_Angeles" });

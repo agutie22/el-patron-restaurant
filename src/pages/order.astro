@@ -13,14 +13,14 @@ const orderableItems = [
   { id: 'main-3', name: 'Chipotle Cacio e Pepe', price: 24, category: 'Especialidades' },
   { id: 'main-4', name: 'Tequila Lime Salmon', price: 34, category: 'Especialidades' },
   { id: 'main-5', name: 'Guajillo Braised Short Rib', price: 38, category: 'Especialidades' },
-  { id: 'drink-1', name: 'The Patrón Margarita', price: 16, category: 'Bebidas' },
+  { id: 'drink-1', name: 'The Padrino Margarita', price: 16, category: 'Bebidas' },
   { id: 'drink-2', name: 'Oaxacan Boulevardier', price: 17, category: 'Bebidas' },
   { id: 'drink-3', name: 'Desert Sage Old Fashioned', price: 18, category: 'Bebidas' },
   { id: 'drink-4', name: 'Agave Spritz', price: 15, category: 'Bebidas' }
 ];
 ---
 
-<Layout title="Order Online | El Patrón Mesa">
+<Layout title="Order Online | El Padrino Mesa">
   <!-- Order Header -->
   <section class="order-hero">
     <div class="container text-center">
@@ -142,7 +142,7 @@ const orderableItems = [
                   <span id="subtotalVal">$0.00</span>
                 </div>
                 <div class="total-row">
-                  <span>Tax (8.38% Las Vegas NV)</span>
+                  <span>Tax (7.6% Pahrump NV)</span>
                   <span id="taxVal">$0.00</span>
                 </div>
                 <div class="total-row grand-total">
@@ -274,7 +274,7 @@ const orderableItems = [
             <span id="drawerSubtotalVal">$0.00</span>
           </div>
           <div class="total-row">
-            <span>Tax (8.38% Las Vegas NV)</span>
+                   <span>Tax (7.6% Pahrump NV)</span>
             <span id="drawerTaxVal">$0.00</span>
           </div>
           <div class="total-row grand-total">
@@ -1001,7 +1001,7 @@ const orderableItems = [
 
     function getCart() {
       try {
-        const cartData = localStorage.getItem('el_patron_cart');
+         const cartData = localStorage.getItem('el_padrino_cart');
         return cartData ? JSON.parse(cartData) : [];
       } catch (e) {
         return [];
@@ -1009,7 +1009,7 @@ const orderableItems = [
     }
 
     function saveCart(cart: any[]) {
-      localStorage.setItem('el_patron_cart', JSON.stringify(cart));
+       localStorage.setItem('el_padrino_cart', JSON.stringify(cart));
       window.dispatchEvent(new Event('cart-updated'));
     }
 
@@ -1128,8 +1128,8 @@ const orderableItems = [
         if (drawerCartItemsList) drawerCartItemsList.appendChild(drawerRow);
       });
 
-      // Compute Taxes and Totals (8.38% Las Vegas tax rate)
-      const taxRate = 0.0838;
+      // Compute Taxes and Totals (7.6% Pahrump tax rate)
+      const taxRate = 0.076;
       const tax = subtotal * taxRate;
       const total = subtotal + tax;
 
@@ -1297,7 +1297,7 @@ const orderableItems = [
           if (successCustomerName) successCustomerName.textContent = orderData.customer.name;
           
           let subtotal = orderData.items.reduce((sum, item: any) => sum + (item.price * item.quantity), 0);
-          let tax = subtotal * 0.0838; // 8.38% Las Vegas
+          let tax = subtotal * 0.076; // 7.6% Pahrump
           let total = subtotal + tax;
           if (successTotal) successTotal.textContent = `$${total.toFixed(2)}`;
 

@@ -8,7 +8,7 @@ interface Props {
 }
 
 const { 
-  title = "El Patron | Fine Mexican-Italian-American Fusion", 
+  title = "El Padrino | Fine Mexican-Italian-American Fusion", 
   description = "Experience the culinary synthesis of three cultures: Mexican, Italian, and American. Premium wood-fired grilling and fine mezcal in a rustic, minimal desert setting." 
 } = Astro.props;
 ---
@@ -32,7 +32,7 @@ const {
     <header class="header">
       <div class="container header-container">
         <a href={import.meta.env.BASE_URL} class="logo">
-          EL PATRÓN
+          EL PADRINO
           <span class="logo-subtitle">Mesa Fusion</span>
         </a>
 
@@ -64,7 +64,7 @@ const {
     <footer class="footer">
       <div class="container footer-grid">
         <div class="footer-brand">
-          <h3 class="footer-title">EL PATRÓN</h3>
+          <h3 class="footer-title">EL PADRINO</h3>
           <p class="footer-concept">Three Cultures. One Flavor.</p>
           <div class="desert-icon-container">
             <svg class="agave-svg" width="60" height="40" viewBox="0 0 60 40">
@@ -87,19 +87,19 @@ const {
           <h4>Contact & Location</h4>
           <p class="footer-address">
             738 Agave Neon Way<br />
-            Las Vegas, Nevada 89109
+            Pahrump, Nevada 89048
           </p>
           <p class="footer-phone">
             <a href="tel:+15205550190">(520) 555-0190</a>
           </p>
           <p class="footer-email">
-            <a href="mailto:hola@elpatronmesa.com">hola@elpatronmesa.com</a>
+            <a href="mailto:hola@elpadrinomesa.com">hola@elpadrinomesa.com</a>
           </p>
         </div>
       </div>
 
       <div class="container footer-bottom">
-        <p>&copy; {new Date().getFullYear()} El Patrón Restaurant. All Rights Reserved.</p>
+        <p>&copy; {new Date().getFullYear()} El Padrino Restaurant. All Rights Reserved.</p>
       </div>
     </footer>
 
@@ -497,7 +497,7 @@ const {
         const badge = document.getElementById('cartBadge');
         if (badge) {
           try {
-            const cartData = localStorage.getItem('el_patron_cart');
+            const cartData = localStorage.getItem('el_padrino_cart');
             if (cartData) {
               const cart = JSON.parse(cartData);
               const count = cart.reduce((total: number, item: any) => total + item.quantity, 0);
